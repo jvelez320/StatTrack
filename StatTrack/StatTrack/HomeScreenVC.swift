@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeScreenVC.swift
 //  StatTrack
 //
 //  Created by Ryan Hamby on 11/1/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class HomeScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

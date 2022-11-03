@@ -7,23 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D90E55313321F8857FD8EC8 /* Pods_StatTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C95F02F1A7D041B4D2C70CD /* Pods_StatTrack.framework */; };
 		F7D73F782911F4190069FCB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F772911F4190069FCB4 /* AppDelegate.swift */; };
 		F7D73F7A2911F4190069FCB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F792911F4190069FCB4 /* SceneDelegate.swift */; };
-		F7D73F7C2911F4190069FCB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F7B2911F4190069FCB4 /* ViewController.swift */; };
+		F7D73F7C2911F4190069FCB4 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F7B2911F4190069FCB4 /* HomeScreenVC.swift */; };
 		F7D73F7F2911F4190069FCB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7D73F7D2911F4190069FCB4 /* Main.storyboard */; };
 		F7D73F812911F41E0069FCB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7D73F802911F41E0069FCB4 /* Assets.xcassets */; };
 		F7D73F842911F41E0069FCB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7D73F822911F41E0069FCB4 /* LaunchScreen.storyboard */; };
+		F7DA88662913FF7B00EDA38C /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA88652913FF7B00EDA38C /* GameState.swift */; };
+		F7DA886A2913FFE600EDA38C /* GameSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA88692913FFE600EDA38C /* GameSetupVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C95F02F1A7D041B4D2C70CD /* Pods_StatTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75C317F3A0D0F7298B594EB3 /* Pods-StatTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatTrack.debug.xcconfig"; path = "Target Support Files/Pods-StatTrack/Pods-StatTrack.debug.xcconfig"; sourceTree = "<group>"; };
+		C92700D246543D145580D11F /* Pods-StatTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatTrack.release.xcconfig"; path = "Target Support Files/Pods-StatTrack/Pods-StatTrack.release.xcconfig"; sourceTree = "<group>"; };
 		F7D73F742911F4190069FCB4 /* StatTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StatTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D73F772911F4190069FCB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7D73F792911F4190069FCB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F7D73F7B2911F4190069FCB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F7D73F7B2911F4190069FCB4 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
 		F7D73F7E2911F4190069FCB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F7D73F802911F41E0069FCB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7D73F832911F41E0069FCB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F7D73F852911F41E0069FCB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7DA88652913FF7B00EDA38C /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		F7DA88692913FFE600EDA38C /* GameSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +39,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D90E55313321F8857FD8EC8 /* Pods_StatTrack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C67E1414E4E63E1EC7700B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C95F02F1A7D041B4D2C70CD /* Pods_StatTrack.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F2DB511ADCBBADFE0944EE11 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				75C317F3A0D0F7298B594EB3 /* Pods-StatTrack.debug.xcconfig */,
+				C92700D246543D145580D11F /* Pods-StatTrack.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F7D73F6B2911F4180069FCB4 = {
 			isa = PBXGroup;
 			children = (
 				F7D73F762911F4190069FCB4 /* StatTrack */,
 				F7D73F752911F4190069FCB4 /* Products */,
+				F2DB511ADCBBADFE0944EE11 /* Pods */,
+				8C67E1414E4E63E1EC7700B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,7 +87,9 @@
 			children = (
 				F7D73F772911F4190069FCB4 /* AppDelegate.swift */,
 				F7D73F792911F4190069FCB4 /* SceneDelegate.swift */,
-				F7D73F7B2911F4190069FCB4 /* ViewController.swift */,
+				F7D73F7B2911F4190069FCB4 /* HomeScreenVC.swift */,
+				F7DA88692913FFE600EDA38C /* GameSetupVC.swift */,
+				F7DA88652913FF7B00EDA38C /* GameState.swift */,
 				F7D73F7D2911F4190069FCB4 /* Main.storyboard */,
 				F7D73F802911F41E0069FCB4 /* Assets.xcassets */,
 				F7D73F822911F41E0069FCB4 /* LaunchScreen.storyboard */,
@@ -74,9 +105,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F7D73F882911F41E0069FCB4 /* Build configuration list for PBXNativeTarget "StatTrack" */;
 			buildPhases = (
+				EF63BBE74B8EC5E40BBC601E /* [CP] Check Pods Manifest.lock */,
 				F7D73F702911F4190069FCB4 /* Sources */,
 				F7D73F712911F4190069FCB4 /* Frameworks */,
 				F7D73F722911F4190069FCB4 /* Resources */,
+				D3AAD4F428DF9A3AAF3D8BA7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,13 +166,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D3AAD4F428DF9A3AAF3D8BA7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StatTrack/Pods-StatTrack-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StatTrack/Pods-StatTrack-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StatTrack/Pods-StatTrack-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF63BBE74B8EC5E40BBC601E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StatTrack-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F7D73F702911F4190069FCB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7D73F7C2911F4190069FCB4 /* ViewController.swift in Sources */,
+				F7D73F7C2911F4190069FCB4 /* HomeScreenVC.swift in Sources */,
+				F7DA88662913FF7B00EDA38C /* GameState.swift in Sources */,
 				F7D73F782911F4190069FCB4 /* AppDelegate.swift in Sources */,
+				F7DA886A2913FFE600EDA38C /* GameSetupVC.swift in Sources */,
 				F7D73F7A2911F4190069FCB4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +359,7 @@
 		};
 		F7D73F892911F41E0069FCB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75C317F3A0D0F7298B594EB3 /* Pods-StatTrack.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -310,6 +388,7 @@
 		};
 		F7D73F8A2911F41E0069FCB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C92700D246543D145580D11F /* Pods-StatTrack.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
