@@ -8,7 +8,55 @@
 import Foundation
 import SQLite
 
-final class GameState {
-    // connect to SQLite
-    // store data of game at current time
+// Store data of the game at CURRENT time. When TFLite model returns info about a frame,
+// we will update the GameState first, then update the SQLite DB with some of this info.
+// All calls about CURRENT score, object positions, possession, etc. should be sourced from here.
+// GameState includes methods that query the DB to look for made basket events, etc.
+struct GameState {
+    var currentTime: Double
+    var teamAHasOfficialPossesion: Bool = false
+    var recentShotAttempt: Bool = false // 3 second buffer if becomes true
+    var recentMadeShot: Bool = false // 3 second buffer if becomes true
+    
+    var teamA: Team
+    var teamB: Team
+    var ball: Ball
+    var rim: Rim
+    var net: Net
+    
+    mutating func checkShotAttempt() -> Bool {
+        return false
+    }
+    mutating func checkMadeBasket() -> Bool {
+        return false
+    }
+    mutating func checkPossesionChange() -> Bool {
+        return false
+    }
+    func determineWhichTeamShot() -> String {
+        return "none"
+    }
+}
+
+struct Team {
+    var name: String
+    var shirtColor: String
+    var perceivedPossession: Double
+    var numMakes: Int
+    var numMisses: Int
+}
+
+struct Ball {
+    var centerX: Double?
+    var centerY: Double?
+}
+
+struct Rim {
+    var centerX: Double?
+    var centerY: Double?
+}
+
+struct Net {
+    var centerX: Double?
+    var centerY: Double?
 }
