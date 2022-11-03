@@ -16,6 +16,9 @@
 		F7D73F842911F41E0069FCB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7D73F822911F41E0069FCB4 /* LaunchScreen.storyboard */; };
 		F7DA88662913FF7B00EDA38C /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA88652913FF7B00EDA38C /* GameState.swift */; };
 		F7DA886A2913FFE600EDA38C /* GameSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA88692913FFE600EDA38C /* GameSetupVC.swift */; };
+		F7DA886C2914160200EDA38C /* CameraSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA886B2914160200EDA38C /* CameraSetupVC.swift */; };
+		F7DA886E291416EE00EDA38C /* LiveGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA886D291416EE00EDA38C /* LiveGameVC.swift */; };
+		F7DA88702914172500EDA38C /* FinalStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA886F2914172500EDA38C /* FinalStatsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		F7D73F852911F41E0069FCB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7DA88652913FF7B00EDA38C /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		F7DA88692913FFE600EDA38C /* GameSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupVC.swift; sourceTree = "<group>"; };
+		F7DA886B2914160200EDA38C /* CameraSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSetupVC.swift; sourceTree = "<group>"; };
+		F7DA886D291416EE00EDA38C /* LiveGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveGameVC.swift; sourceTree = "<group>"; };
+		F7DA886F2914172500EDA38C /* FinalStatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalStatsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +66,6 @@
 				75C317F3A0D0F7298B594EB3 /* Pods-StatTrack.debug.xcconfig */,
 				C92700D246543D145580D11F /* Pods-StatTrack.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -87,9 +92,12 @@
 			children = (
 				F7D73F772911F4190069FCB4 /* AppDelegate.swift */,
 				F7D73F792911F4190069FCB4 /* SceneDelegate.swift */,
+				F7DA886B2914160200EDA38C /* CameraSetupVC.swift */,
 				F7D73F7B2911F4190069FCB4 /* HomeScreenVC.swift */,
 				F7DA88692913FFE600EDA38C /* GameSetupVC.swift */,
 				F7DA88652913FF7B00EDA38C /* GameState.swift */,
+				F7DA886D291416EE00EDA38C /* LiveGameVC.swift */,
+				F7DA886F2914172500EDA38C /* FinalStatsVC.swift */,
 				F7D73F7D2911F4190069FCB4 /* Main.storyboard */,
 				F7D73F802911F41E0069FCB4 /* Assets.xcassets */,
 				F7D73F822911F41E0069FCB4 /* LaunchScreen.storyboard */,
@@ -218,6 +226,9 @@
 				F7D73F782911F4190069FCB4 /* AppDelegate.swift in Sources */,
 				F7DA886A2913FFE600EDA38C /* GameSetupVC.swift in Sources */,
 				F7D73F7A2911F4190069FCB4 /* SceneDelegate.swift in Sources */,
+				F7DA886C2914160200EDA38C /* CameraSetupVC.swift in Sources */,
+				F7DA886E291416EE00EDA38C /* LiveGameVC.swift in Sources */,
+				F7DA88702914172500EDA38C /* FinalStatsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
