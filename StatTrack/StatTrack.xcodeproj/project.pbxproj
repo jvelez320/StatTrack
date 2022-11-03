@@ -19,6 +19,7 @@
 		F7DA886C2914160200EDA38C /* CameraSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA886B2914160200EDA38C /* CameraSetupVC.swift */; };
 		F7DA886E291416EE00EDA38C /* LiveGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA886D291416EE00EDA38C /* LiveGameVC.swift */; };
 		F7DA88702914172500EDA38C /* FinalStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA886F2914172500EDA38C /* FinalStatsVC.swift */; };
+		F7EB7A80291420BC00F84686 /* model_v0.tflite in Resources */ = {isa = PBXBuildFile; fileRef = F7EB7A7F291420BC00F84686 /* model_v0.tflite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		F7DA886B2914160200EDA38C /* CameraSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSetupVC.swift; sourceTree = "<group>"; };
 		F7DA886D291416EE00EDA38C /* LiveGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveGameVC.swift; sourceTree = "<group>"; };
 		F7DA886F2914172500EDA38C /* FinalStatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalStatsVC.swift; sourceTree = "<group>"; };
+		F7EB7A7F291420BC00F84686 /* model_v0.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_v0.tflite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		F7D73F762911F4190069FCB4 /* StatTrack */ = {
 			isa = PBXGroup;
 			children = (
+				F7EB7A7E291420BC00F84686 /* model */,
 				F7D73F772911F4190069FCB4 /* AppDelegate.swift */,
 				F7D73F792911F4190069FCB4 /* SceneDelegate.swift */,
 				F7D73F7B2911F4190069FCB4 /* HomeScreenVC.swift */,
@@ -104,6 +107,14 @@
 				F7D73F852911F41E0069FCB4 /* Info.plist */,
 			);
 			path = StatTrack;
+			sourceTree = "<group>";
+		};
+		F7EB7A7E291420BC00F84686 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F7EB7A7F291420BC00F84686 /* model_v0.tflite */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +180,7 @@
 				F7D73F842911F41E0069FCB4 /* LaunchScreen.storyboard in Resources */,
 				F7D73F812911F41E0069FCB4 /* Assets.xcassets in Resources */,
 				F7D73F7F2911F4190069FCB4 /* Main.storyboard in Resources */,
+				F7EB7A80291420BC00F84686 /* model_v0.tflite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
