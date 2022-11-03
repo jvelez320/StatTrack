@@ -7,9 +7,11 @@
 
 import Foundation
 import SQLite
+// Note: this is not Apple's SQLite3. It is a layer over this SQLite3 for Swift syntax.
+// Reference from: https://github.com/stephencelis/SQLite.swift
 
 // Store data of the game at CURRENT time. When TFLite model returns info about a frame,
-// we will update the GameState first, then update the SQLite DB with some of this info.
+// we will update the GameState first, then update + query the SQLite DB with some of this info.
 // All calls about CURRENT score, object positions, possession, etc. should be sourced from here.
 // GameState includes methods that query the DB to look for made basket events, etc.
 struct GameState {
@@ -35,6 +37,18 @@ struct GameState {
     }
     func determineWhichTeamShot() -> String {
         return "none"
+    }
+    func updateBallCoordinates() {
+        
+    }
+    func updatePlayersCoordinates() {
+        
+    }
+    func updateRimCoordinates() {
+        
+    }
+    func updateNetCoordinates() {
+        
     }
 }
 
