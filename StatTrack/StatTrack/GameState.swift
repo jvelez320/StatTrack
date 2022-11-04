@@ -7,7 +7,6 @@
 
 import Foundation
 import SQLite
-// comments
 // Note: this is not Apple's SQLite3. It is a layer over this SQLite3 for Swift syntax.
 // Reference from: https://github.com/stephencelis/SQLite.swift
 
