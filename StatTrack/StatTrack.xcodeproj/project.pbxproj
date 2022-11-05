@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D90E55313321F8857FD8EC8 /* Pods_StatTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C95F02F1A7D041B4D2C70CD /* Pods_StatTrack.framework */; };
+		F7B915C12916FD6B0025BE42 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B915C02916FD6B0025BE42 /* OverlayView.swift */; };
 		F7D73F782911F4190069FCB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F772911F4190069FCB4 /* AppDelegate.swift */; };
 		F7D73F7A2911F4190069FCB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F792911F4190069FCB4 /* SceneDelegate.swift */; };
 		F7D73F7C2911F4190069FCB4 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F7B2911F4190069FCB4 /* HomeScreenVC.swift */; };
@@ -20,12 +21,16 @@
 		F7DA886E291416EE00EDA38C /* LiveGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA886D291416EE00EDA38C /* LiveGameVC.swift */; };
 		F7DA88702914172500EDA38C /* FinalStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DA886F2914172500EDA38C /* FinalStatsVC.swift */; };
 		F7EB7A80291420BC00F84686 /* model_v0.tflite in Resources */ = {isa = PBXBuildFile; fileRef = F7EB7A7F291420BC00F84686 /* model_v0.tflite */; };
+		F7EB7A882916F3AC00F84686 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB7A862916F3AC00F84686 /* PreviewView.swift */; };
+		F7EB7A892916F3AC00F84686 /* CameraFeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB7A872916F3AC00F84686 /* CameraFeedManager.swift */; };
+		F7EB7A8B2916F40400F84686 /* ObjectDetectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EB7A8A2916F40400F84686 /* ObjectDetectionHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5C95F02F1A7D041B4D2C70CD /* Pods_StatTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C317F3A0D0F7298B594EB3 /* Pods-StatTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatTrack.debug.xcconfig"; path = "Target Support Files/Pods-StatTrack/Pods-StatTrack.debug.xcconfig"; sourceTree = "<group>"; };
 		C92700D246543D145580D11F /* Pods-StatTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatTrack.release.xcconfig"; path = "Target Support Files/Pods-StatTrack/Pods-StatTrack.release.xcconfig"; sourceTree = "<group>"; };
+		F7B915C02916FD6B0025BE42 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		F7D73F742911F4190069FCB4 /* StatTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StatTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D73F772911F4190069FCB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7D73F792911F4190069FCB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +45,9 @@
 		F7DA886D291416EE00EDA38C /* LiveGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveGameVC.swift; sourceTree = "<group>"; };
 		F7DA886F2914172500EDA38C /* FinalStatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalStatsVC.swift; sourceTree = "<group>"; };
 		F7EB7A7F291420BC00F84686 /* model_v0.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_v0.tflite; sourceTree = "<group>"; };
+		F7EB7A862916F3AC00F84686 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		F7EB7A872916F3AC00F84686 /* CameraFeedManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraFeedManager.swift; sourceTree = "<group>"; };
+		F7EB7A8A2916F40400F84686 /* ObjectDetectionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectDetectionHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F7B915BF2916FD6B0025BE42 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F7B915C02916FD6B0025BE42 /* OverlayView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F7D73F6B2911F4180069FCB4 = {
 			isa = PBXGroup;
 			children = (
@@ -92,7 +108,9 @@
 		F7D73F762911F4190069FCB4 /* StatTrack */ = {
 			isa = PBXGroup;
 			children = (
+				F7EB7A852916F3AC00F84686 /* cameraFeed */,
 				F7EB7A7E291420BC00F84686 /* model */,
+				F7B915BF2916FD6B0025BE42 /* Views */,
 				F7D73F772911F4190069FCB4 /* AppDelegate.swift */,
 				F7D73F792911F4190069FCB4 /* SceneDelegate.swift */,
 				F7D73F7B2911F4190069FCB4 /* HomeScreenVC.swift */,
@@ -112,9 +130,19 @@
 		F7EB7A7E291420BC00F84686 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				F7EB7A8A2916F40400F84686 /* ObjectDetectionHelper.swift */,
 				F7EB7A7F291420BC00F84686 /* model_v0.tflite */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		F7EB7A852916F3AC00F84686 /* cameraFeed */ = {
+			isa = PBXGroup;
+			children = (
+				F7EB7A862916F3AC00F84686 /* PreviewView.swift */,
+				F7EB7A872916F3AC00F84686 /* CameraFeedManager.swift */,
+			);
+			path = cameraFeed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,11 +262,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7D73F7C2911F4190069FCB4 /* HomeScreenVC.swift in Sources */,
+				F7EB7A8B2916F40400F84686 /* ObjectDetectionHelper.swift in Sources */,
 				F7DA88662913FF7B00EDA38C /* GameState.swift in Sources */,
+				F7EB7A892916F3AC00F84686 /* CameraFeedManager.swift in Sources */,
+				F7EB7A882916F3AC00F84686 /* PreviewView.swift in Sources */,
 				F7D73F782911F4190069FCB4 /* AppDelegate.swift in Sources */,
 				F7DA886A2913FFE600EDA38C /* GameSetupVC.swift in Sources */,
 				F7D73F7A2911F4190069FCB4 /* SceneDelegate.swift in Sources */,
 				F7DA886C2914160200EDA38C /* CameraSetupVC.swift in Sources */,
+				F7B915C12916FD6B0025BE42 /* OverlayView.swift in Sources */,
 				F7DA886E291416EE00EDA38C /* LiveGameVC.swift in Sources */,
 				F7DA88702914172500EDA38C /* FinalStatsVC.swift in Sources */,
 			);
@@ -394,6 +426,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -423,6 +456,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

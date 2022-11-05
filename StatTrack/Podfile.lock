@@ -2,17 +2,21 @@ PODS:
   - SQLite.swift (0.14.1):
     - SQLite.swift/standard (= 0.14.1)
   - SQLite.swift/standard (0.14.1)
+  - TensorFlowLiteTaskVision (0.4.3)
 
 DEPENDENCIES:
   - SQLite.swift (~> 0.14.0)
+  - TensorFlowLiteTaskVision
 
 SPEC REPOS:
   trunk:
     - SQLite.swift
+    - TensorFlowLiteTaskVision
 
 SPEC CHECKSUMS:
   SQLite.swift: 2992550ebf3c5b268bf4352603e3df87d2a4ed72
+  TensorFlowLiteTaskVision: 125d5b49d325ba2cf3938454da5f74a1cbfe0552
 
-PODFILE CHECKSUM: 6db532a4fb1fb933275641685ea27c5f8e026e04
+PODFILE CHECKSUM: f79b7973f31218869b543857919451381cd9d30e
 
 COCOAPODS: 1.11.3
