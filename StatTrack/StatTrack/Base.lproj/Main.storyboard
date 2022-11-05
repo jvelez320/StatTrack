@@ -108,7 +108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eie-qG-IV8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2381" y="86"/>
+            <point key="canvasLocation" x="2380.5803571428569" y="85.507246376811594"/>
         </scene>
         <!--Live GameVC-->
         <scene sceneID="yid-QP-zzh">
@@ -118,6 +118,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53w-yT-EvM">
+                                <rect key="frame" x="372" y="197" width="152" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TvV-Du-Pis">
+                                <rect key="frame" x="410" y="227.5" width="76" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Resume"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qA7-SR-dIQ" customClass="PreviewView" customModule="StatTrack" customModuleProvider="target">
+                                <rect key="frame" x="44" y="0.0" width="808" height="393"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0y-q6-Sri" customClass="OverlayView" customModule="StatTrack" customModuleProvider="target">
+                                <rect key="frame" x="44" y="0.0" width="808" height="393"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="din-yN-RZu">
                                 <rect key="frame" x="723" y="316" width="91" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -130,12 +149,32 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kP8-7I-5rZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="W0y-q6-Sri" firstAttribute="top" secondItem="kP8-7I-5rZ" secondAttribute="top" id="5RY-O3-SLa"/>
+                            <constraint firstItem="53w-yT-EvM" firstAttribute="centerY" secondItem="FO8-Bf-DjZ" secondAttribute="centerY" id="62f-4a-FbT"/>
+                            <constraint firstItem="qA7-SR-dIQ" firstAttribute="bottom" secondItem="kP8-7I-5rZ" secondAttribute="bottom" id="UWD-mw-nCI"/>
+                            <constraint firstItem="W0y-q6-Sri" firstAttribute="trailing" secondItem="kP8-7I-5rZ" secondAttribute="trailing" id="YI7-fK-b30"/>
+                            <constraint firstItem="TvV-Du-Pis" firstAttribute="centerX" secondItem="FO8-Bf-DjZ" secondAttribute="centerX" id="YS0-Sd-4v4"/>
+                            <constraint firstItem="qA7-SR-dIQ" firstAttribute="top" secondItem="kP8-7I-5rZ" secondAttribute="top" id="dJL-oM-pka"/>
+                            <constraint firstItem="qA7-SR-dIQ" firstAttribute="leading" secondItem="kP8-7I-5rZ" secondAttribute="leading" id="lSw-4L-WHr"/>
+                            <constraint firstItem="W0y-q6-Sri" firstAttribute="leading" secondItem="kP8-7I-5rZ" secondAttribute="leading" id="lmf-2t-1Pl"/>
+                            <constraint firstItem="TvV-Du-Pis" firstAttribute="top" secondItem="53w-yT-EvM" secondAttribute="bottom" constant="10" id="t1U-bN-weI"/>
+                            <constraint firstItem="53w-yT-EvM" firstAttribute="centerX" secondItem="FO8-Bf-DjZ" secondAttribute="centerX" id="tpw-fN-iCR"/>
+                            <constraint firstItem="qA7-SR-dIQ" firstAttribute="trailing" secondItem="kP8-7I-5rZ" secondAttribute="trailing" id="udn-D3-ay1"/>
+                            <constraint firstItem="W0y-q6-Sri" firstAttribute="bottom" secondItem="kP8-7I-5rZ" secondAttribute="bottom" id="w55-cL-ec5"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9tg-RZ-Emc"/>
+                    <connections>
+                        <outlet property="cameraUnavailableLabel" destination="53w-yT-EvM" id="jqM-hF-szM"/>
+                        <outlet property="overlayView" destination="W0y-q6-Sri" id="JPD-Jm-53s"/>
+                        <outlet property="previewView" destination="qA7-SR-dIQ" id="yzV-gL-om4"/>
+                        <outlet property="resumeButton" destination="TvV-Du-Pis" id="cjC-oH-RKn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kdt-8a-jQ7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3084" y="86"/>
+            <point key="canvasLocation" x="3083.7053571428569" y="85.507246376811594"/>
         </scene>
         <!--Final StatsVC-->
         <scene sceneID="4MP-Dy-h1s">
@@ -191,7 +230,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sGX-kN-LxA"/>
+        <segue reference="mlq-OS-0HN"/>
         <segue reference="8Oe-Zb-FIg"/>
     </inferredMetricsTieBreakers>
     <resources>
