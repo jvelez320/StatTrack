@@ -87,24 +87,42 @@ final class LiveGameVC: UIViewController {
 //    addPanGesture()
   }
 
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		switch UIDevice.current.orientation {
+		case UIDeviceOrientation.portraitUpsideDown:
+			previewView.previewLayer.connection?.videoOrientation = .portraitUpsideDown
+		case UIDeviceOrientation.landscapeLeft:
+			previewView.previewLayer.connection?.videoOrientation = .landscapeRight
+		case UIDeviceOrientation.landscapeRight:
+			previewView.previewLayer.connection?.videoOrientation = .landscapeLeft
+		case UIDeviceOrientation.portrait:
+			previewView.previewLayer.connection?.videoOrientation = .portrait
+		default:
+			break
+		}
+	}
+
     var screenRect: CGRect! = nil
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        screenRect = UIScreen.main.bounds
-        previewView.previewLayer.frame = CGRect(x: 0, y: 0, width: screenRect.size.width, height: screenRect.size.height)
-        
-        switch UIDevice.current.orientation {
-            case UIDeviceOrientation.portraitUpsideDown:
-                previewView.previewLayer.connection?.videoOrientation = .portraitUpsideDown
-    case UIDeviceOrientation.landscapeLeft:
-        previewView.previewLayer.connection?.videoOrientation = .landscapeRight
-    case UIDeviceOrientation.landscapeRight:
-        previewView.previewLayer.connection?.videoOrientation = .landscapeLeft
-    case UIDeviceOrientation.portrait:
-        previewView.previewLayer.connection?.videoOrientation = .portrait
-    default:
-    break
-    }
- }
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		screenRect = UIScreen.main.bounds
+		previewView.previewLayer.frame = CGRect(x: 0, y: 0, width: screenRect.size.width, height: screenRect.size.height)
+
+		switch UIDevice.current.orientation {
+		case UIDeviceOrientation.portraitUpsideDown:
+			previewView.previewLayer.connection?.videoOrientation = .portraitUpsideDown
+		case UIDeviceOrientation.landscapeLeft:
+			previewView.previewLayer.connection?.videoOrientation = .landscapeRight
+		case UIDeviceOrientation.landscapeRight:
+			previewView.previewLayer.connection?.videoOrientation = .landscapeLeft
+		case UIDeviceOrientation.portrait:
+			previewView.previewLayer.connection?.videoOrientation = .portrait
+		default:
+			break
+		}
+	}
+
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
