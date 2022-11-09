@@ -23,9 +23,9 @@ struct GameState {
     
     var teamA: Team? = nil
     var teamB: Team? = nil
-    var ball: Ball? = nil
-    var rim: Rim? = nil
-    var net: Net? = nil
+    var ball: Ball
+    var rim: Rim
+    var net: Net
     
     mutating func checkShotAttempt() -> Bool {
         return false
@@ -39,17 +39,22 @@ struct GameState {
     func determineWhichTeamShot() -> String {
         return "none"
     }
-    func updateBallCoordinates() {
-        
+    mutating func updateBallCoordinates(xCoord: Double, yCoord: Double) {
+        ball.centerX = xCoord
+        ball.centerY = yCoord
     }
     func updatePlayersCoordinates() {
-        
+    
     }
-    func updateRimCoordinates() {
-        
+    mutating func updateRimCoordinates(xCoord: Double, yCoord: Double) {
+        print(rim.centerX)
+        rim.centerX = xCoord
+        rim.centerY = yCoord
+        print(rim.centerX)
     }
-    func updateNetCoordinates() {
-        
+    mutating func updateNetCoordinates(xCoord: Double, yCoord: Double) {
+        net.centerX = xCoord
+        net.centerY = yCoord
     }
 }
 
@@ -62,16 +67,16 @@ struct Team {
 }
 
 struct Ball {
-    var centerX: Double?
-    var centerY: Double?
+    var centerX: Double? = nil
+    var centerY: Double? = nil
 }
 
 struct Rim {
-    var centerX: Double?
-    var centerY: Double?
+    var centerX: Double? = nil
+    var centerY: Double? = nil
 }
 
 struct Net {
-    var centerX: Double?
-    var centerY: Double?
+    var centerX: Double? = nil
+    var centerY: Double? = nil
 }

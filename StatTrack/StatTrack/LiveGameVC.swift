@@ -24,7 +24,7 @@ import UIKit
 final class LiveGameVC: UIViewController {
     
     //GameState Object
-    private var gameState = GameState()
+    private var gameState = GameState(ball:Ball(), rim:Rim(), net:Net())
 
 //  // MARK: Storyboards Connections
     @IBOutlet weak var previewView: PreviewView!
@@ -357,15 +357,28 @@ extension LiveGameVC: CameraFeedManagerDelegate {
 
       let size = objectDescription.size(withAttributes: [.font: self.displayFont])
         
+        // Get x coordinate of the center of the object
+        //print("Origin: ", convertedRect.origin.x)
+        let xCoord = convertedRect.origin.x + (0.5 * convertedRect.size.width)
+        //print("Center: ", xCoord)
+        
+        // Get y coordinate of the center of the object
+        //print("Origin: ", convertedRect.origin.y)
+        let yCoord = convertedRect.origin.y + (0.5 * convertedRect.size.height)
+        //print("Center: ", yCoord)
+        
         switch category.label {
             
         case "player":
             break // To be written in MVP
+        case "ball":
+            gameState.updateBallCoordinates(xCoord:xCoord, yCoord:yCoord)
+        case "rim":
+            gameState.updateRimCoordinates(xCoord:xCoord, yCoord:yCoord)
+        case "net":
+            gameState.updateNetCoordinates(xCoord:xCoord, yCoord:yCoord)
         default:
-            // Get y coordinate of the center of the object
-            print("Origin: ", convertedRect.origin.y)
-            let yCoord = convertedRect.origin.y + (0.5 * convertedRect.size.height)
-            print("Center: ", yCoord)
+            break
         }
         
         
