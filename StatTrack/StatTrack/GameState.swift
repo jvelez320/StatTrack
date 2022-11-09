@@ -16,16 +16,16 @@ import SQLite
 // All calls about CURRENT score, object positions, possession, etc. should be sourced from here.
 // GameState includes methods that query the DB to look for made basket events, etc.
 struct GameState {
-    var currentTime: Double
+    var currentTime: Double? = nil
     var teamAHasOfficialPossesion: Bool = false
     var recentShotAttempt: Bool = false // 3 second buffer if becomes true
     var recentMadeShot: Bool = false // 3 second buffer if becomes true
     
-    var teamA: Team
-    var teamB: Team
-    var ball: Ball
-    var rim: Rim
-    var net: Net
+    var teamA: Team? = nil
+    var teamB: Team? = nil
+    var ball: Ball? = nil
+    var rim: Rim? = nil
+    var net: Net? = nil
     
     mutating func checkShotAttempt() -> Bool {
         return false

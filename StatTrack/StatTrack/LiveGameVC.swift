@@ -22,6 +22,9 @@ import TensorFlowLiteTaskVision
 import UIKit
 
 final class LiveGameVC: UIViewController {
+    
+    //GameState Object
+    private var gameState = GameState()
 
 //  // MARK: Storyboards Connections
     @IBOutlet weak var previewView: PreviewView!
@@ -353,6 +356,19 @@ extension LiveGameVC: CameraFeedManagerDelegate {
       let displayColor = colors[category.index % colors.count]
 
       let size = objectDescription.size(withAttributes: [.font: self.displayFont])
+        
+        switch category.label {
+            
+        case "player":
+            break // To be written in MVP
+        default:
+            // Get y coordinate of the center of the object
+            print("Origin: ", convertedRect.origin.y)
+            let yCoord = convertedRect.origin.y + (0.5 * convertedRect.size.height)
+            print("Center: ", yCoord)
+        }
+        
+        
 
       let objectOverlay = ObjectOverlay(
         name: objectDescription, borderRect: convertedRect, nameStringSize: size,
