@@ -136,7 +136,19 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0y-q6-Sri" customClass="OverlayView" customModule="StatTrack" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="48" width="896" height="332"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQH-UV-Ejb">
+                                        <rect key="frame" x="60" y="20" width="57" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="eQH-UV-Ejb" firstAttribute="top" secondItem="W0y-q6-Sri" secondAttribute="top" constant="20" id="KKI-Xz-zaD"/>
+                                    <constraint firstItem="eQH-UV-Ejb" firstAttribute="leading" secondItem="W0y-q6-Sri" secondAttribute="leading" constant="60" id="iQK-Iw-46d"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="din-yN-RZu">
                                 <rect key="frame" x="723" y="316" width="91" height="31"/>
@@ -168,6 +180,7 @@
                     <navigationItem key="navigationItem" id="9tg-RZ-Emc"/>
                     <connections>
                         <outlet property="cameraUnavailableLabel" destination="53w-yT-EvM" id="jqM-hF-szM"/>
+                        <outlet property="gameEventLabel" destination="eQH-UV-Ejb" id="QTs-f2-1rd"/>
                         <outlet property="overlayView" destination="W0y-q6-Sri" id="JPD-Jm-53s"/>
                         <outlet property="previewView" destination="qA7-SR-dIQ" id="yzV-gL-om4"/>
                         <outlet property="resumeButton" destination="TvV-Du-Pis" id="cjC-oH-RKn"/>

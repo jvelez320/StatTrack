@@ -90,7 +90,7 @@ func initiailizeDB() -> () {
 struct GameState {
     var currentTime: Double? = nil
     var teamAHasOfficialPossesion: Bool = false
-    var recentShotAttempt: Bool = false // 3 second buffer if becomes true
+    var recentShotAttempt: Date? = nil // 3 second buffer if becomes true
     var recentMadeShot: Bool = false // 3 second buffer if becomes true
     
     var teamA: Team? = nil
@@ -99,10 +99,14 @@ struct GameState {
     var rim: Rim
     var net: Net
     
-    let db = try Connection(fileURL.path)
+//    let db = try Connection(fileURL.path)
     
     mutating func checkShotAttempt() -> Bool {
-        return ball.centerY > rim.centerY && abs(ball.centerX - rim.centerX) < 100
+        if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY {
+            recentShotAttempt = Date()
+            return ballCenterY > rimCenterY && abs(ballCenterX - rimCenterX) < 100
+        }
+        return false
     }
     mutating func checkMadeBasket() -> Bool {
         return false
