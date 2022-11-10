@@ -30,6 +30,7 @@ final class LiveGameVC: UIViewController {
     @IBOutlet weak var previewView: PreviewView!
     @IBOutlet weak var cameraUnavailableLabel: UILabel!
     @IBOutlet weak var overlayView: OverlayView!
+    @IBOutlet weak var gameEventLabel: UILabel!
     @IBOutlet weak var resumeButton: UIButton!
 
   // MARK: Constants
@@ -395,7 +396,17 @@ extension LiveGameVC: CameraFeedManagerDelegate {
             break
         }
         
-        let drawShotLabel = gameState.checkShotAttempt()
+        let shouldDrawShotLabel = gameState.checkShotAttempt()
+        if (shouldDrawShotLabel) {
+            gameEventLabel.text = "Shot Attempted" 
+        }
+        
+        if let recentShot = gameState.recentShotAttempt {
+            print(recentShot)
+            if (Date.now > recentShot.advanced(by: 3)) {
+                gameEventLabel.text = ""
+            }
+        }
         
 
       let objectOverlay = ObjectOverlay(
