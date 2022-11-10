@@ -89,15 +89,11 @@ final class LiveGameVC: UIViewController {
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		switch UIDevice.current.orientation {
-		case UIDeviceOrientation.portraitUpsideDown:
-			previewView.previewLayer.connection?.videoOrientation = .portraitUpsideDown
-		case UIDeviceOrientation.landscapeLeft:
-			previewView.previewLayer.connection?.videoOrientation = .landscapeRight
-		case UIDeviceOrientation.landscapeRight:
+		switch UIApplication.shared.statusBarOrientation {
+		case .landscapeLeft:
 			previewView.previewLayer.connection?.videoOrientation = .landscapeLeft
-		case UIDeviceOrientation.portrait:
-			previewView.previewLayer.connection?.videoOrientation = .portrait
+		case .landscapeRight:
+			previewView.previewLayer.connection?.videoOrientation = .landscapeRight
 		default:
 			break
 		}
