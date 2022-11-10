@@ -12,6 +12,7 @@ final class HomeScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.view.addBackground()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -27,3 +28,16 @@ final class HomeScreenVC: UIViewController {
 
 }
 
+extension UIView {
+    func addBackground() {
+        // screen width and height:
+        let imageViewBackground = UIImageView(frame: UIScreen.main.bounds)
+        imageViewBackground.image = UIImage(named: "statTrack")
+
+        // you can change the content mode:
+        imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFill
+
+        self.addSubview(imageViewBackground)
+        self.sendSubviewToBack(imageViewBackground)
+    }
+}
