@@ -24,7 +24,7 @@ import UIKit
 final class LiveGameVC: UIViewController {
     
     //GameState Object
-    private var gameState = GameState(ball:Ball(), rim:Rim(), net:Net())
+    private var gameState = GameState()
 
 //  // MARK: Storyboards Connections
     @IBOutlet weak var previewView: PreviewView!
@@ -395,6 +395,7 @@ extension LiveGameVC: CameraFeedManagerDelegate {
             break
         }
         
+        let drawShotLabel = gameState.checkShotAttempt()
         
 
       let objectOverlay = ObjectOverlay(
