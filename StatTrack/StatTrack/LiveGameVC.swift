@@ -121,56 +121,54 @@ final class LiveGameVC: UIViewController {
 		}
 	}
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-//    changeBottomViewState()
-    cameraFeedManager.checkCameraConfigurationAndStartSession()
-  }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-
-    cameraFeedManager.stopSession()
-  }
-
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
-  }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
   // MARK: Button Actions
   @IBAction func onClickResumeButton(_ sender: Any) {
-    cameraFeedManager.resumeInterruptedSession { (complete) in
+      cameraFeedManager.resumeInterruptedSession { (complete) in
 
       if complete {
-        self.resumeButton.isHidden = true
-        self.cameraUnavailableLabel.isHidden = true
+          self.resumeButton.isHidden = true
+          self.cameraUnavailableLabel.isHidden = true
       } else {
-        self.presentUnableToResumeSessionAlert()
+          self.presentUnableToResumeSessionAlert()
       }
     }
   }
 
   func presentUnableToResumeSessionAlert() {
-    let alert = UIAlertController(
-      title: "Unable to Resume Session",
-      message: "There was an error while attempting to resume session.",
-      preferredStyle: .alert
-    )
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+      let alert = UIAlertController(
+        title: "Unable to Resume Session",
+        message: "There was an error while attempting to resume session.",
+        preferredStyle: .alert
+      )
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
-    self.present(alert, animated: true)
+      self.present(alert, animated: true)
   }
 
   // MARK: Storyboard Segue Handlers
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    super.prepare(for: segue, sender: sender)
+      super.prepare(for: segue, sender: sender)
 
-    if segue.identifier == "EMBED" {
+      if segue.identifier == "EMBED" {
 //      inferenceViewController = segue.destination as? InferenceViewController
 
 //      inferenceViewController?.currentThreadCount = threadCount
@@ -184,8 +182,8 @@ final class LiveGameVC: UIViewController {
 //        return
 //      }
 //      inferenceViewController?.inferenceTime = tempResult.inferenceTime
+      }
     }
-  }
 }
 
 // MARK: InferenceViewControllerDelegate Methods
