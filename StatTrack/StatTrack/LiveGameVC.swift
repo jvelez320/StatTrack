@@ -402,11 +402,9 @@ extension LiveGameVC: CameraFeedManagerDelegate {
             gameEventLabel.text = "Shot Attempted" 
         }
         
-        if let recentShot = gameState.recentShotAttempt {
-            print(recentShot)
-            if (Date.now > recentShot.advanced(by: 3)) {
-                gameEventLabel.text = ""
-            }
+        print(gameState.recentShotAttempt)
+        if (Date() > gameState.recentShotAttempt.advanced(by: 3)) {
+            gameEventLabel.text = ""
         }
         
 
