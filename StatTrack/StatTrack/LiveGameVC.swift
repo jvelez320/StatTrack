@@ -26,69 +26,70 @@ final class LiveGameVC: UIViewController {
     //GameState Object
     private var gameState = GameState()
 
-//  // MARK: Storyboards Connections
+    //  // MARK: Storyboards Connections
     @IBOutlet weak var previewView: PreviewView!
     @IBOutlet weak var cameraUnavailableLabel: UILabel!
     @IBOutlet weak var overlayView: OverlayView!
     @IBOutlet weak var gameEventLabel: UILabel!
     @IBOutlet weak var resumeButton: UIButton!
 
-  // MARK: Constants
-  private let displayFont = UIFont.systemFont(ofSize: 14.0, weight: .medium)
-  private let edgeOffset: CGFloat = 2.0
-  private let labelOffset: CGFloat = 10.0
-  private let animationDuration = 0.5
-  private let collapseTransitionThreshold: CGFloat = -30.0
-  private let expandTransitionThreshold: CGFloat = 30.0
-  private let colors = [
-    UIColor.red,
-    UIColor(displayP3Red: 90.0 / 255.0, green: 200.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0),
-    UIColor.green,
-    UIColor.orange,
-    UIColor.blue,
-    UIColor.purple,
-    UIColor.magenta,
-    UIColor.yellow,
-    UIColor.cyan,
-    UIColor.brown,
-  ]
+    // MARK: Constants
+    private let displayFont = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+    private let edgeOffset: CGFloat = 2.0
+    private let labelOffset: CGFloat = 10.0
+    private let animationDuration = 0.5
+    private let collapseTransitionThreshold: CGFloat = -30.0
+    private let expandTransitionThreshold: CGFloat = 30.0
+    private let colors = [
+        UIColor.red,
+        UIColor(displayP3Red: 90.0 / 255.0, green: 200.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0),
+        UIColor.green,
+        UIColor.orange,
+        UIColor.blue,
+        UIColor.purple,
+        UIColor.magenta,
+        UIColor.yellow,
+        UIColor.cyan,
+        UIColor.brown,
+    ]
 
-  // MARK: Model config variables
-  private var threadCount: Int = 1
-  private var detectionModel: ModelType = ConstantsDefault.modelType
-  private var scoreThreshold: Float = ConstantsDefault.scoreThreshold
-  private var maxResults: Int = ConstantsDefault.maxResults
+    // MARK: Model config variables
+    private var threadCount: Int = 1
+    private var detectionModel: ModelType = ConstantsDefault.modelType
+    private var scoreThreshold: Float = ConstantsDefault.scoreThreshold
+    private var maxResults: Int = ConstantsDefault.maxResults
 
-  // MARK: Instance Variables
-  private var initialBottomSpace: CGFloat = 0.0
+    // MARK: Instance Variables
+    private var initialBottomSpace: CGFloat = 0.0
 
-  // Holds the results at any time
-  private var result: Result?
-  private let inferenceQueue = DispatchQueue(label: "org.tensorflow.lite.inferencequeue")
-  private var isInferenceQueueBusy = false
+    // Holds the results at any time
+    private var result: Result?
+    private let inferenceQueue = DispatchQueue(label: "org.tensorflow.lite.inferencequeue")
+    private var isInferenceQueueBusy = false
 
-  // MARK: Controllers that manage functionality
-  private lazy var cameraFeedManager = CameraFeedManager(previewView: previewView)
-  private var objectDetectionHelper: ObjectDetectionHelper? = ObjectDetectionHelper(
+    // MARK: Controllers that manage functionality
+    private lazy var cameraFeedManager = CameraFeedManager(previewView: previewView)
+    private var objectDetectionHelper: ObjectDetectionHelper? = ObjectDetectionHelper(
     modelFileInfo: ConstantsDefault.modelType.modelFileInfo,
     threadCount: ConstantsDefault.threadCount,
     scoreThreshold: ConstantsDefault.scoreThreshold,
     maxResults: ConstantsDefault.maxResults
-  )
-//  private var inferenceViewController: InferenceViewController?
+    )
+    //  private var inferenceViewController: InferenceViewController?
 
-  // MARK: View Handling Methods
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    guard objectDetectionHelper != nil else {
-      fatalError("Failed to create the ObjectDetectionHelper. See the console for the error.")
+    // MARK: View Handling Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        guard objectDetectionHelper != nil else {
+            fatalError("Failed to create the ObjectDetectionHelper. See the console for the error.")
+        }
+        cameraFeedManager.delegate = self
+        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
+    //    overlayView.clearsContextBeforeDrawing = true
+    //    addPanGesture()
     }
-    cameraFeedManager.delegate = self
-//    overlayView.clearsContextBeforeDrawing = true
-//    addPanGesture()
-  }
-
-	override func viewDidAppear(_ animated: Bool) {
+    
+    override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		switch UIApplication.shared.statusBarOrientation {
 		case .landscapeLeft:
@@ -120,56 +121,56 @@ final class LiveGameVC: UIViewController {
 		}
 	}
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        cameraFeedManager.checkCameraConfigurationAndStartSession()
+    }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-//    changeBottomViewState()
-    cameraFeedManager.checkCameraConfigurationAndStartSession()
-  }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        cameraFeedManager.stopSession()
+    }
 
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-
-    cameraFeedManager.stopSession()
-  }
-
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
-  }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
   // MARK: Button Actions
   @IBAction func onClickResumeButton(_ sender: Any) {
-    cameraFeedManager.resumeInterruptedSession { (complete) in
+      cameraFeedManager.resumeInterruptedSession { (complete) in
 
       if complete {
-        self.resumeButton.isHidden = true
-        self.cameraUnavailableLabel.isHidden = true
+          self.resumeButton.isHidden = true
+          self.cameraUnavailableLabel.isHidden = true
       } else {
-        self.presentUnableToResumeSessionAlert()
+          self.presentUnableToResumeSessionAlert()
       }
     }
   }
 
   func presentUnableToResumeSessionAlert() {
-    let alert = UIAlertController(
-      title: "Unable to Resume Session",
-      message: "There was an error while attempting to resume session.",
-      preferredStyle: .alert
-    )
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+      let alert = UIAlertController(
+        title: "Unable to Resume Session",
+        message: "There was an error while attempting to resume session.",
+        preferredStyle: .alert
+      )
+      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
-    self.present(alert, animated: true)
+      self.present(alert, animated: true)
   }
 
   // MARK: Storyboard Segue Handlers
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    super.prepare(for: segue, sender: sender)
+      super.prepare(for: segue, sender: sender)
 
-    if segue.identifier == "EMBED" {
+      if segue.identifier == "EMBED" {
 //      inferenceViewController = segue.destination as? InferenceViewController
 
 //      inferenceViewController?.currentThreadCount = threadCount
@@ -183,8 +184,8 @@ final class LiveGameVC: UIViewController {
 //        return
 //      }
 //      inferenceViewController?.inferenceTime = tempResult.inferenceTime
+      }
     }
-  }
 }
 
 // MARK: InferenceViewControllerDelegate Methods
