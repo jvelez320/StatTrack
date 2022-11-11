@@ -129,10 +129,8 @@ struct GameState {
     
     }
     mutating func updateRimCoordinates(xCoord: Double, yCoord: Double) {
-        print(rim.centerX ?? -1)
         rim.centerX = xCoord
         rim.centerY = yCoord
-        print(rim.centerX ?? -1)
     }
     mutating func updateNetCoordinates(xCoord: Double, yCoord: Double) {
         net.centerX = xCoord

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D90E55313321F8857FD8EC8 /* Pods_StatTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C95F02F1A7D041B4D2C70CD /* Pods_StatTrack.framework */; };
+		F7402824291F01DC006931D0 /* model_v1.tflite in Resources */ = {isa = PBXBuildFile; fileRef = F7402823291F01DC006931D0 /* model_v1.tflite */; };
 		F7B915C12916FD6B0025BE42 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B915C02916FD6B0025BE42 /* OverlayView.swift */; };
 		F7D73F782911F4190069FCB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F772911F4190069FCB4 /* AppDelegate.swift */; };
 		F7D73F7A2911F4190069FCB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F792911F4190069FCB4 /* SceneDelegate.swift */; };
@@ -30,6 +31,7 @@
 		5C95F02F1A7D041B4D2C70CD /* Pods_StatTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C317F3A0D0F7298B594EB3 /* Pods-StatTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatTrack.debug.xcconfig"; path = "Target Support Files/Pods-StatTrack/Pods-StatTrack.debug.xcconfig"; sourceTree = "<group>"; };
 		C92700D246543D145580D11F /* Pods-StatTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatTrack.release.xcconfig"; path = "Target Support Files/Pods-StatTrack/Pods-StatTrack.release.xcconfig"; sourceTree = "<group>"; };
+		F7402823291F01DC006931D0 /* model_v1.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = model_v1.tflite; sourceTree = "<group>"; };
 		F7B915C02916FD6B0025BE42 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		F7D73F742911F4190069FCB4 /* StatTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StatTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7D73F772911F4190069FCB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				F7EB7A8A2916F40400F84686 /* ObjectDetectionHelper.swift */,
 				F7EB7A7F291420BC00F84686 /* model_v0.tflite */,
+				F7402823291F01DC006931D0 /* model_v1.tflite */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				F7D73F842911F41E0069FCB4 /* LaunchScreen.storyboard in Resources */,
 				F7D73F812911F41E0069FCB4 /* Assets.xcassets in Resources */,
 				F7D73F7F2911F4190069FCB4 /* Main.storyboard in Resources */,
+				F7402824291F01DC006931D0 /* model_v1.tflite in Resources */,
 				F7EB7A80291420BC00F84686 /* model_v0.tflite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,7 +424,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 62FQJJUSZJ;
+				DEVELOPMENT_TEAM = 5MDSGP6D6K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StatTrack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires the camera to record a game's stats";
@@ -429,12 +433,13 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.jgvelez.StatTrack;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.hambyr.StatTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -450,7 +455,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 62FQJJUSZJ;
+				DEVELOPMENT_TEAM = 5MDSGP6D6K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StatTrack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires the camera to record a game's stats";
@@ -459,12 +464,13 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.jgvelez.StatTrack;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.hambyr.StatTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

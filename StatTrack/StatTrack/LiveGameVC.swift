@@ -346,7 +346,7 @@ extension LiveGameVC: CameraFeedManagerDelegate {
         CGAffineTransform(
           scaleX: self.overlayView.bounds.size.width / imageSize.width,
           y: self.overlayView.bounds.size.height / imageSize.height))
-
+        
       if convertedRect.origin.x < 0 {
         convertedRect.origin.x = self.edgeOffset
       }
@@ -365,6 +365,20 @@ extension LiveGameVC: CameraFeedManagerDelegate {
           self.overlayView.bounds.maxX - convertedRect.origin.x - self.edgeOffset
       }
 
+        
+        // model tends to predict large portions of the screen are ball, rim, or net
+        let maxObjectWidthThreshold = self.overlayView.frame.width / 4
+        let maxPlayerWidthThreshold = self.overlayView.frame.width / 3
+        
+        if ((category.label == "ball" || category.label == "net" || category.label == "rim") &&
+            convertedRect.maxX - convertedRect.origin.x > maxObjectWidthThreshold) {
+            break
+        }
+        
+        if ((category.label == "player") && convertedRect.maxX - convertedRect.origin.x > maxPlayerWidthThreshold) {
+            break
+        }
+        
       let objectDescription = String(
         format: "\(category.label ?? "Unknown") (%.2f)",
         category.score)
@@ -374,14 +388,10 @@ extension LiveGameVC: CameraFeedManagerDelegate {
       let size = objectDescription.size(withAttributes: [.font: self.displayFont])
         
         // Get x coordinate of the center of the object
-        //print("Origin: ", convertedRect.origin.x)
         let xCoord = convertedRect.origin.x + (0.5 * convertedRect.size.width)
-        //print("Center: ", xCoord)
         
         // Get y coordinate of the center of the object
-        //print("Origin: ", convertedRect.origin.y)
         let yCoord = convertedRect.origin.y + (0.5 * convertedRect.size.height)
-        //print("Center: ", yCoord)
         
         switch category.label {
             
@@ -402,7 +412,6 @@ extension LiveGameVC: CameraFeedManagerDelegate {
             gameEventLabel.text = "Shot Attempted" 
         }
         
-        print(gameState.recentShotAttempt)
         if (Date() > gameState.recentShotAttempt.advanced(by: 3)) {
             gameEventLabel.text = ""
         }
@@ -569,11 +578,14 @@ extension LiveGameVC {
 /// TFLite model types
 enum ModelType: CaseIterable {
   case model_v0
+  case model_v1
 
   var modelFileInfo: FileInfo {
     switch self {
     case .model_v0:
         return FileInfo("model_v0", "tflite")
+    case .model_v1:
+        return FileInfo("model_v1", "tflite")
     }
   }
 
@@ -581,15 +593,17 @@ enum ModelType: CaseIterable {
     switch self {
     case .model_v0:
       return "model_v0"
+    case .model_v1:
+      return "model_v1"
   }
   }
 }
 
 /// Default configuration
 struct ConstantsDefault {
-  static let modelType: ModelType = .model_v0
+  static let modelType: ModelType = .model_v1
   static let threadCount = 1
-  static let scoreThreshold: Float = 0.2
-  static let maxResults: Int = 10
+    static let scoreThreshold: Float = 0.2
+  static let maxResults: Int = 20
   static let theadCountLimit = 10
 }
