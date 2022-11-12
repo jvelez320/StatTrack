@@ -313,6 +313,11 @@ extension LiveGameVC: CameraFeedManagerDelegate {
       }
 //      self.inferenceViewController?.inferenceTime = inferenceTime
 //      self.inferenceViewController?.tableView.reloadData()
+        
+        //Remove shot attempt label if its been too long
+        if (Date() > self.gameState.recentShotAttempt.advanced(by: 3)) {
+            self.gameEventLabel.text = ""
+        }
 
       // Draws the bounding boxes and displays class names and confidence scores.
       self.drawAfterPerformingCalculations(
@@ -407,11 +412,6 @@ extension LiveGameVC: CameraFeedManagerDelegate {
               if (shouldDrawShotLabel) {
                   gameEventLabel.text = "Shot Attempted"
               }
-              
-              if (Date() > gameState.recentShotAttempt.advanced(by: 3)) {
-                  gameEventLabel.text = ""
-              }
-              
               
               let objectOverlay = ObjectOverlay(
                 name: objectDescription, borderRect: convertedRect, nameStringSize: size,
