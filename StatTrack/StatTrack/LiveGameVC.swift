@@ -337,93 +337,90 @@ extension LiveGameVC: CameraFeedManagerDelegate {
 
     var objectOverlays: [ObjectOverlay] = []
 
-    for detection in detections {
-
-      guard let category = detection.categories.first else { continue }
-
-      // Translates bounding box rect to current view.
-      var convertedRect = detection.boundingBox.applying(
-        CGAffineTransform(
-          scaleX: self.overlayView.bounds.size.width / imageSize.width,
-          y: self.overlayView.bounds.size.height / imageSize.height))
-        
-      if convertedRect.origin.x < 0 {
-        convertedRect.origin.x = self.edgeOffset
+      for detection in detections {
+          
+          guard let category = detection.categories.first else { continue }
+          
+          // Translates bounding box rect to current view.
+          var convertedRect = detection.boundingBox.applying(
+            CGAffineTransform(
+                scaleX: self.overlayView.bounds.size.width / imageSize.width,
+                y: self.overlayView.bounds.size.height / imageSize.height))
+          
+          if convertedRect.origin.x < 0 {
+              convertedRect.origin.x = self.edgeOffset
+          }
+          
+          if convertedRect.origin.y < 0 {
+              convertedRect.origin.y = self.edgeOffset
+          }
+          
+          if convertedRect.maxY > self.overlayView.bounds.maxY {
+              convertedRect.size.height =
+              self.overlayView.bounds.maxY - convertedRect.origin.y - self.edgeOffset
+          }
+          
+          if convertedRect.maxX > self.overlayView.bounds.maxX {
+              convertedRect.size.width =
+              self.overlayView.bounds.maxX - convertedRect.origin.x - self.edgeOffset
+          }
+          
+          
+          // model tends to predict large portions of the screen are ball, rim, or net
+          let maxObjectWidthThreshold = self.overlayView.frame.width / 4
+          let maxPlayerWidthThreshold = self.overlayView.frame.width / 3
+          
+          if !((category.label == "ball" || category.label == "net" || category.label == "rim") &&
+               convertedRect.maxX - convertedRect.origin.x > maxObjectWidthThreshold) &&
+                !((category.label == "player") && convertedRect.maxX - convertedRect.origin.x > maxPlayerWidthThreshold){
+              
+              
+              let objectDescription = String(
+                format: "\(category.label ?? "Unknown") (%.2f)",
+                category.score)
+              
+              let displayColor = colors[category.index % colors.count]
+              
+              let size = objectDescription.size(withAttributes: [.font: self.displayFont])
+              
+              // Get x coordinate of the center of the object
+              let xCoord = convertedRect.origin.x + (0.5 * convertedRect.size.width)
+              
+              // Get y coordinate of the center of the object
+              let yCoord = convertedRect.origin.y + (0.5 * convertedRect.size.height)
+              
+              switch category.label {
+                  
+              case "player":
+                  break // To be written in MVP
+              case "ball":
+                  gameState.updateBallCoordinates(xCoord:xCoord, yCoord:yCoord)
+              case "rim":
+                  gameState.updateRimCoordinates(xCoord:xCoord, yCoord:yCoord)
+              case "net":
+                  gameState.updateNetCoordinates(xCoord:xCoord, yCoord:yCoord)
+              default:
+                  break
+              }
+              
+              let shouldDrawShotLabel = gameState.checkShotAttempt()
+              if (shouldDrawShotLabel) {
+                  gameEventLabel.text = "Shot Attempted"
+              }
+              
+              if (Date() > gameState.recentShotAttempt.advanced(by: 3)) {
+                  gameEventLabel.text = ""
+              }
+              
+              
+              let objectOverlay = ObjectOverlay(
+                name: objectDescription, borderRect: convertedRect, nameStringSize: size,
+                color: displayColor,
+                font: self.displayFont)
+              
+              objectOverlays.append(objectOverlay)
+          }
       }
-
-      if convertedRect.origin.y < 0 {
-        convertedRect.origin.y = self.edgeOffset
-      }
-
-      if convertedRect.maxY > self.overlayView.bounds.maxY {
-        convertedRect.size.height =
-          self.overlayView.bounds.maxY - convertedRect.origin.y - self.edgeOffset
-      }
-
-      if convertedRect.maxX > self.overlayView.bounds.maxX {
-        convertedRect.size.width =
-          self.overlayView.bounds.maxX - convertedRect.origin.x - self.edgeOffset
-      }
-
-        
-        // model tends to predict large portions of the screen are ball, rim, or net
-        let maxObjectWidthThreshold = self.overlayView.frame.width / 4
-        let maxPlayerWidthThreshold = self.overlayView.frame.width / 3
-        
-        if ((category.label == "ball" || category.label == "net" || category.label == "rim") &&
-            convertedRect.maxX - convertedRect.origin.x > maxObjectWidthThreshold) {
-            break
-        }
-        
-        if ((category.label == "player") && convertedRect.maxX - convertedRect.origin.x > maxPlayerWidthThreshold) {
-            break
-        }
-        
-      let objectDescription = String(
-        format: "\(category.label ?? "Unknown") (%.2f)",
-        category.score)
-
-      let displayColor = colors[category.index % colors.count]
-
-      let size = objectDescription.size(withAttributes: [.font: self.displayFont])
-        
-        // Get x coordinate of the center of the object
-        let xCoord = convertedRect.origin.x + (0.5 * convertedRect.size.width)
-        
-        // Get y coordinate of the center of the object
-        let yCoord = convertedRect.origin.y + (0.5 * convertedRect.size.height)
-        
-        switch category.label {
-            
-        case "player":
-            break // To be written in MVP
-        case "ball":
-            gameState.updateBallCoordinates(xCoord:xCoord, yCoord:yCoord)
-        case "rim":
-            gameState.updateRimCoordinates(xCoord:xCoord, yCoord:yCoord)
-        case "net":
-            gameState.updateNetCoordinates(xCoord:xCoord, yCoord:yCoord)
-        default:
-            break
-        }
-        
-        let shouldDrawShotLabel = gameState.checkShotAttempt()
-        if (shouldDrawShotLabel) {
-            gameEventLabel.text = "Shot Attempted" 
-        }
-        
-        if (Date() > gameState.recentShotAttempt.advanced(by: 3)) {
-            gameEventLabel.text = ""
-        }
-        
-
-      let objectOverlay = ObjectOverlay(
-        name: objectDescription, borderRect: convertedRect, nameStringSize: size,
-        color: displayColor,
-        font: self.displayFont)
-
-      objectOverlays.append(objectOverlay)
-    }
 
     // Hands off drawing to the OverlayView
     self.draw(objectOverlays: objectOverlays)
