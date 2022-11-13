@@ -68,31 +68,48 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Start"/>
                                 <connections>
-                                    <action selector="verifyStart:" destination="znJ-Qq-JgQ" eventType="touchUpInside" id="RjX-4U-x9I"/>
                                     <segue destination="ZPX-qq-VZn" kind="show" identifier="CameraSetup" id="8IS-CZ-5cp"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J6W-EX-33R">
-                                <rect key="frame" x="593" y="146" width="206" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gec-XL-36T">
                                 <rect key="frame" x="90" y="146" width="206" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J6W-EX-33R">
+                                <rect key="frame" x="593" y="146" width="206" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <colorWell contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="g1S-J3-ovg">
+                                <rect key="frame" x="646" y="231" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </colorWell>
+                            <colorWell contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vab-HK-t8C">
+                                <rect key="frame" x="143" y="231" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </colorWell>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select team name and colors before starting." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btM-oU-2ZL">
+                                <rect key="frame" x="333" y="208" width="230" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gmZ-N2-mO0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outlet property="Start" destination="tZd-im-qyl" id="Ebj-Vi-g1Y"/>
+                        <outlet property="awayTeamColor" destination="g1S-J3-ovg" id="8uV-pb-gM3"/>
                         <outlet property="awayTeamName" destination="J6W-EX-33R" id="Eg2-GW-kax"/>
                         <outlet property="gameSetupTitle" destination="ucs-5x-u5h" id="wV1-2a-5hd"/>
+                        <outlet property="homeTeamColor" destination="Vab-HK-t8C" id="6bm-Dc-9Kc"/>
                         <outlet property="homeTeamName" destination="gec-XL-36T" id="QPi-Bh-mWM"/>
+                        <outlet property="textHelp" destination="btM-oU-2ZL" id="QD8-cu-2TL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jr6-Pt-hvL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
