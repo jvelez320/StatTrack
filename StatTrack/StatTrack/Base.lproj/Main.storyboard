@@ -96,7 +96,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFC-j5-wz8">
-                                <rect key="frame" x="699" y="269" width="91" height="48"/>
+                                <rect key="frame" x="751" y="287" width="91" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Let's Play!"/>
@@ -108,6 +108,10 @@
                         <viewLayoutGuide key="safeArea" id="0ro-N5-fI7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="goButton" destination="rFC-j5-wz8" id="AJE-nE-4w8"/>
+                        <outlet property="setupLabel" destination="Jbw-cM-gPQ" id="kQa-rG-5oy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eie-qG-IV8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
