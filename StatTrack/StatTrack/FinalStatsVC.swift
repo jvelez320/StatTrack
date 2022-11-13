@@ -7,15 +7,18 @@
 
 import UIKit
 
-final class FinalStatsVC: UIViewController {
+final class FinalStatsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var invisibleLabelTableBorder: UILabel!
+    @IBOutlet weak var labelTotalPoints: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white;
+        overrideUserInterfaceStyle = .light
         // Do any additional setup after loading the view.
-        tableView.backgroundColor = .red
+        invisibleLabelTableBorder.layer.borderWidth = 3
+        invisibleLabelTableBorder.layer.borderColor = UIColor.black.cgColor
+        labelTotalPoints.layer.zPosition = 2
     }
 
     override func viewWillAppear(_ animated: Bool) {
