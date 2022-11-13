@@ -101,12 +101,12 @@
                             <colorWell contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Vab-HK-t8C">
                                 <rect key="frame" x="127" y="186" width="142" height="144"/>
                             </colorWell>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select team name and colors before starting." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btM-oU-2ZL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select team name and colors before starting." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="btM-oU-2ZL">
                                 <rect key="frame" x="343" y="208" width="230" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="2j9-VE-Ki6"/>
                                     <constraint firstAttribute="height" constant="79" id="4yE-ul-xqW"/>
-                                    <constraint firstAttribute="width" constant="230" id="PFd-Zp-BzM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
@@ -158,7 +158,7 @@
         <scene sceneID="Zqz-MB-bbd">
             <objects>
                 <viewController id="ZPX-qq-VZn" customClass="CameraSetupVC" customModule="StatTrack" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="ste-gy-vb8">
+                    <view key="view" contentMode="scaleToFill" id="ste-gy-vb8">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -186,12 +186,12 @@
                         <viewLayoutGuide key="safeArea" id="0ro-N5-fI7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="0ro-N5-fI7" firstAttribute="bottom" secondItem="rFC-j5-wz8" secondAttribute="bottom" constant="45" id="4ey-Eq-VRK"/>
                             <constraint firstItem="0ro-N5-fI7" firstAttribute="trailing" secondItem="Jbw-cM-gPQ" secondAttribute="trailing" constant="385" id="5dj-XR-5IH"/>
+                            <constraint firstItem="rFC-j5-wz8" firstAttribute="leading" secondItem="0ro-N5-fI7" secondAttribute="leading" constant="740" id="7Ya-mH-BqG"/>
                             <constraint firstItem="Jbw-cM-gPQ" firstAttribute="leading" secondItem="0ro-N5-fI7" secondAttribute="leading" constant="402" id="Xra-RH-Nrm"/>
+                            <constraint firstItem="0ro-N5-fI7" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rFC-j5-wz8" secondAttribute="trailing" id="Xxn-LS-JVF"/>
                             <constraint firstItem="Jbw-cM-gPQ" firstAttribute="top" secondItem="0ro-N5-fI7" secondAttribute="top" constant="14" id="ZE8-oA-4pc"/>
-                            <constraint firstItem="rFC-j5-wz8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0ro-N5-fI7" secondAttribute="leading" symbolic="YES" id="eki-bi-4Y8"/>
-                            <constraint firstItem="0ro-N5-fI7" firstAttribute="trailing" secondItem="rFC-j5-wz8" secondAttribute="trailing" constant="54" id="fHt-yL-CNd"/>
+                            <constraint firstItem="0ro-N5-fI7" firstAttribute="bottom" secondItem="rFC-j5-wz8" secondAttribute="bottom" constant="16.5" id="yA4-Df-gel"/>
                         </constraints>
                     </view>
                     <connections>
@@ -521,7 +521,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6xO-9l-rn3"/>
+        <segue reference="8IS-CZ-5cp"/>
         <segue reference="8Oe-Zb-FIg"/>
     </inferredMetricsTieBreakers>
     <resources>
