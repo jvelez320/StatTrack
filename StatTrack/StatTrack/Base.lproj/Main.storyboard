@@ -299,7 +299,7 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="8Oe-Zb-FIg"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Final Stats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NP5-YA-Lkj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Final Stats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NP5-YA-Lkj">
                                 <rect key="frame" x="428" y="58" width="79" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -484,6 +484,10 @@
                         <viewLayoutGuide key="safeArea" id="oll-ap-Vsl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="oll-ap-Vsl" firstAttribute="trailing" secondItem="NP5-YA-Lkj" secondAttribute="trailing" constant="389" id="2vJ-Tm-fgz"/>
+                            <constraint firstItem="NP5-YA-Lkj" firstAttribute="leading" secondItem="oll-ap-Vsl" secondAttribute="leading" constant="428" id="Lyz-7q-RWw"/>
+                            <constraint firstItem="NP5-YA-Lkj" firstAttribute="top" secondItem="oll-ap-Vsl" secondAttribute="top" constant="10" id="YAi-Mm-pDn"/>
+                            <constraint firstItem="oll-ap-Vsl" firstAttribute="bottom" secondItem="NP5-YA-Lkj" secondAttribute="bottom" constant="301" id="Yrf-Tg-cPh"/>
                             <constraint firstItem="oll-ap-Vsl" firstAttribute="bottom" secondItem="MxO-HP-2CK" secondAttribute="bottom" constant="309" id="c8w-i8-R7O"/>
                             <constraint firstItem="MxO-HP-2CK" firstAttribute="leading" secondItem="oll-ap-Vsl" secondAttribute="leading" constant="62" id="i77-Ga-qRK"/>
                             <constraint firstItem="oll-ap-Vsl" firstAttribute="top" secondItem="MxO-HP-2CK" secondAttribute="top" constant="8" id="tct-K7-Wrc"/>
@@ -515,7 +519,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="mlq-OS-0HN"/>
         <segue reference="8Oe-Zb-FIg"/>
     </inferredMetricsTieBreakers>
     <resources>
