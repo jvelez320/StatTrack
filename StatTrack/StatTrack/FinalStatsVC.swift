@@ -8,10 +8,14 @@
 import UIKit
 
 final class FinalStatsVC: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white;
         // Do any additional setup after loading the view.
+        tableView.backgroundColor = .red
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -23,6 +27,5 @@ final class FinalStatsVC: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-
 
 }

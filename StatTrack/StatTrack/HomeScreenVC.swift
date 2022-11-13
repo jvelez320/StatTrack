@@ -24,8 +24,6 @@ final class HomeScreenVC: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-
-
 }
 
 extension UIView {
