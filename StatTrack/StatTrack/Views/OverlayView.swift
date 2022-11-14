@@ -40,7 +40,6 @@ class OverlayView: UIView {
   private let stringVerticalSpacing: CGFloat = 7.0
 
   override func draw(_ rect: CGRect) {
-
     // Drawing code
     for objectOverlay in objectOverlays {
 
