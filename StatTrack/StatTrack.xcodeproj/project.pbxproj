@@ -10,6 +10,7 @@
 		6D90E55313321F8857FD8EC8 /* Pods_StatTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C95F02F1A7D041B4D2C70CD /* Pods_StatTrack.framework */; };
 		F7402824291F01DC006931D0 /* model_v1.tflite in Resources */ = {isa = PBXBuildFile; fileRef = F7402823291F01DC006931D0 /* model_v1.tflite */; };
 		F7B915C12916FD6B0025BE42 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B915C02916FD6B0025BE42 /* OverlayView.swift */; };
+		F7C2CA3929353B460080084B /* ColorKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7C2CA3829353B460080084B /* ColorKit */; };
 		F7D73F782911F4190069FCB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F772911F4190069FCB4 /* AppDelegate.swift */; };
 		F7D73F7A2911F4190069FCB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F792911F4190069FCB4 /* SceneDelegate.swift */; };
 		F7D73F7C2911F4190069FCB4 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D73F7B2911F4190069FCB4 /* HomeScreenVC.swift */; };
@@ -58,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D90E55313321F8857FD8EC8 /* Pods_StatTrack.framework in Frameworks */,
+				F7C2CA3929353B460080084B /* ColorKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +168,9 @@
 			dependencies = (
 			);
 			name = StatTrack;
+			packageProductDependencies = (
+				F7C2CA3829353B460080084B /* ColorKit */,
+			);
 			productName = StatTrack;
 			productReference = F7D73F742911F4190069FCB4 /* StatTrack.app */;
 			productType = "com.apple.product-type.application";
@@ -194,6 +199,9 @@
 				Base,
 			);
 			mainGroup = F7D73F6B2911F4180069FCB4;
+			packageReferences = (
+				F7C2CA3729353B460080084B /* XCRemoteSwiftPackageReference "ColorKit" */,
+			);
 			productRefGroup = F7D73F752911F4190069FCB4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -424,7 +432,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PR7NG3SY7C;
+				DEVELOPMENT_TEAM = 5MDSGP6D6K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StatTrack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires the camera to record a game's stats";
@@ -439,7 +447,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.amirmazz.StatTrack;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.hambyr.StatTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -455,7 +463,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PR7NG3SY7C;
+				DEVELOPMENT_TEAM = 5MDSGP6D6K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StatTrack/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires the camera to record a game's stats";
@@ -470,7 +478,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.amirmazz.StatTrack;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.umich.hambyr.StatTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -500,6 +508,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F7C2CA3729353B460080084B /* XCRemoteSwiftPackageReference "ColorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Boris-Em/ColorKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F7C2CA3829353B460080084B /* ColorKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F7C2CA3729353B460080084B /* XCRemoteSwiftPackageReference "ColorKit" */;
+			productName = ColorKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F7D73F6C2911F4180069FCB4 /* Project object */;
 }

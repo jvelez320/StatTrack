@@ -150,7 +150,7 @@ extension GameState {
 
 struct Team {
     var name: String
-    var shirtColor: String
+    var shirtColor: UIColor
     var perceivedPossession: Double
     var numMakes: Int
     var numMisses: Int

@@ -20,6 +20,7 @@
 
 import TensorFlowLiteTaskVision
 import UIKit
+import VideoToolbox
 
 final class LiveGameVC: UIViewController {
     
@@ -33,6 +34,11 @@ final class LiveGameVC: UIViewController {
     @IBOutlet weak var gameEventLabel: UILabel!
     @IBOutlet weak var resumeButton: UIButton!
 
+    var homeColor: UIColor!
+    var awayColor: UIColor!
+    var homeName: String = ""
+    var awayName: String = ""
+    
     // MARK: Constants
     private let displayFont = UIFont.systemFont(ofSize: 14.0, weight: .medium)
     private let edgeOffset: CGFloat = 2.0
@@ -302,7 +308,7 @@ extension LiveGameVC: CameraFeedManagerDelegate {
     let width = CVPixelBufferGetWidth(pixelBuffer)
     let height = CVPixelBufferGetHeight(pixelBuffer)
 
-    DispatchQueue.main.async {
+      DispatchQueue.main.async { [self] in
 
       // Display results by handing off to the InferenceViewController
 //      self.inferenceViewController?.resolution = CGSize(width: width, height: height)
@@ -319,10 +325,13 @@ extension LiveGameVC: CameraFeedManagerDelegate {
             self.gameEventLabel.text = ""
         }
 
+        let cameraImage = CIImage(cvPixelBuffer: pixelBuffer)
+        
       // Draws the bounding boxes and displays class names and confidence scores.
       self.drawAfterPerformingCalculations(
         onDetections: displayResult.detections,
-        withImageSize: CGSize(width: CGFloat(width), height: CGFloat(height)))
+        withImageSize: CGSize(width: CGFloat(width), height: CGFloat(height)),
+      withImage: cameraImage)
     }
   }
 
@@ -330,7 +339,7 @@ extension LiveGameVC: CameraFeedManagerDelegate {
    This method takes the results, translates the bounding box rects to the current view, draws the bounding boxes, classNames and confidence scores of inferences.
    */
   func drawAfterPerformingCalculations(
-    onDetections detections: [Detection], withImageSize imageSize: CGSize
+    onDetections detections: [Detection], withImageSize imageSize: CGSize, withImage img: CIImage
   ) {
 
     self.overlayView.objectOverlays = []
@@ -370,7 +379,6 @@ extension LiveGameVC: CameraFeedManagerDelegate {
               self.overlayView.bounds.maxX - convertedRect.origin.x - self.edgeOffset
           }
           
-          
           // model tends to predict large portions of the screen are ball, rim, or net
           let maxObjectWidthThreshold = self.overlayView.frame.width / 4
           let maxPlayerWidthThreshold = self.overlayView.frame.width / 3
@@ -380,11 +388,11 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                 !((category.label == "player") && convertedRect.maxX - convertedRect.origin.x > maxPlayerWidthThreshold){
               
               
-              let objectDescription = String(
+              var objectDescription = String(
                 format: "\(category.label ?? "Unknown") (%.2f)",
                 category.score)
               
-              let displayColor = colors[category.index % colors.count]
+              var displayColor = colors[category.index % colors.count]
               
               let size = objectDescription.size(withAttributes: [.font: self.displayFont])
               
@@ -411,6 +419,43 @@ extension LiveGameVC: CameraFeedManagerDelegate {
               let shouldDrawShotLabel = gameState.checkShotAttempt()
               if (shouldDrawShotLabel) {
                   gameEventLabel.text = "Shot Attempted"
+              }
+
+              if (category.label == "player"){
+                  // get approximately the shirt area of the player's bounding box
+                  let adjustedCenterX = convertedRect.origin.x + convertedRect.size.width / 3
+                  let adjustedCenterY = convertedRect.origin.y + convertedRect.size.height / 5
+                  let adjustedCenterWidth = convertedRect.size.width / 4
+                  let adjustedCenterHeight = convertedRect.size.height / 3
+
+                  // take a slice of the player's bounding box
+                  let inputExtent = CIVector(x: adjustedCenterX, y: adjustedCenterY, z: adjustedCenterWidth, w: adjustedCenterHeight)
+
+                  // get the average pixel value of this predicted shirt area
+                  let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: img, kCIInputExtentKey: inputExtent])!
+                  let outputPixelCI = filter.outputImage!
+                  
+                  // convert it to UIColor
+                  var bitmap = [UInt8](repeating: 0, count: 4)
+                  let context = CIContext(options: [.workingColorSpace: kCFNull])
+                  context.render(outputPixelCI, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
+                  let playerDetectedJerseyColor = UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
+                  
+                  // compare the color with home and away, and label the player with the most similar color. CIE94 is a color comparison algo.
+                  // color difference function from: https://github.com/Boris-Em/ColorKit#installation
+                  let homeColorDifference = playerDetectedJerseyColor.difference(from: homeColor, using: .CIE94)
+                  let awayColorDifference = playerDetectedJerseyColor.difference(from: awayColor, using: .CIE94)
+                  // print(homeColorDifference)
+                  // print(awayColorDifference)
+                  
+                  if homeColorDifference < awayColorDifference {
+                      displayColor = homeColor
+                      objectDescription = String(format: "\(homeName) \(category.label ?? "Unknown") (%.2f)", category.score)
+                  }
+                  else {
+                      displayColor = awayColor
+                      objectDescription = String(format: "\(awayName) \(category.label ?? "Unknown") (%.2f)", category.score)
+                  }
               }
               
               let objectOverlay = ObjectOverlay(
@@ -601,6 +646,35 @@ struct ConstantsDefault {
   static let modelType: ModelType = .model_v1
   static let threadCount = 1
     static let scoreThreshold: Float = 0.2
-  static let maxResults: Int = 20
+  static let maxResults: Int = 10
   static let theadCountLimit = 10
 }
+
+//extension CIImage {
+//    public convenience init?(pixelBuffer: CVPixelBuffer) {
+//        var cgImage: CGImage?
+//        VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
+//
+//        guard let cgImage = cgImage else {
+//            return nil
+//        }
+//
+//        self.init(cgImage: cgImage)
+//    }
+//}
+
+//extension UIImage {
+//    var averageColor: UIColor? {
+//        guard let inputImage = CIImage(image: self) else { return nil }
+//        let extentVector = CIVector(x: inputImage.extent.origin.x, y: inputImage.extent.origin.y, z: inputImage.extent.size.width, w: inputImage.extent.size.height)
+//
+//        guard let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector]) else { return nil }
+//        guard let outputImage = filter.outputImage else { return nil }
+//
+//        var bitmap = [UInt8](repeating: 0, count: 4)
+//        let context = CIContext(options: [.workingColorSpace: kCFNull])
+//        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
+//
+//        return UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
+//    }
+//}
