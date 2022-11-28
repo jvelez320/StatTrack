@@ -16,6 +16,25 @@ final class CameraSetupVC: UIViewController {
     var session: AVCaptureSession?
     let previewLayer = AVCaptureVideoPreviewLayer()
     
+    var homeColor: UIColor!
+    var awayColor: UIColor!
+    var homeName: String = ""
+    var awayName: String = ""
+    
+    // This function is called before the segue
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+       // Get a reference to the second view controller
+       let liveGameViewController = segue.destination as! LiveGameVC
+
+       // Set a variable in the second view controller with the String to pass
+       liveGameViewController.homeColor = homeColor
+       liveGameViewController.awayColor = awayColor
+       liveGameViewController.homeName = homeName
+       liveGameViewController.awayName = awayName
+   }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black;

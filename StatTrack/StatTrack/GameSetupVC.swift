@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ColorKit
 
 final class GameSetupVC: UIViewController, UITextFieldDelegate {
     
@@ -16,6 +17,7 @@ final class GameSetupVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textHelp: UILabel!
     @IBOutlet weak var homeTeamColor: UIColorWell!
     @IBOutlet weak var awayTeamColor: UIColorWell!
+    
     
     var textFilled: Bool!
     var colorFilled: Bool!
@@ -31,6 +33,19 @@ final class GameSetupVC: UIViewController, UITextFieldDelegate {
         gameSetup()
         setupAddTargetIsNotEmpty()
     }
+    
+    // This function is called before the segue
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+       // Get a reference to the second view controller
+       let cameraSetupViewController = segue.destination as! CameraSetupVC
+
+       // Set a variable in the second view controller with the String to pass
+       cameraSetupViewController.homeColor = homeTeamColor.selectedColor!
+       cameraSetupViewController.awayColor = awayTeamColor.selectedColor!
+       cameraSetupViewController.homeName = homeTeamName.text!
+       cameraSetupViewController.awayName = awayTeamName.text!
+   }
     
     private func gameSetup() {
         homeTeamName.text = ""
@@ -77,6 +92,13 @@ final class GameSetupVC: UIViewController, UITextFieldDelegate {
     
     @objc func colorFieldsNotEmpty(sender: UIColorWell) {
         sender.title = sender.title?.trimmingCharacters(in: .whitespaces)
+//        GameState.teamA?.shirtColor = homeTeamColor.selectedColor
+//        awayUIColor = awayTeamColor.selectedColor
+//        
+//        if (homeUIColor != nil && awayUIColor != nil) {
+//            print(homeUIColor)
+//            print(awayUIColor)
+//        }
         
         guard
             let _ = homeTeamColor.selectedColor,
