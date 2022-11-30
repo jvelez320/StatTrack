@@ -14,8 +14,8 @@
             filePath = "StatTrack/LiveGameVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
             landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "StatTrack/LiveGameVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "StatTrack/LiveGameVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "StatTrack/LiveGameVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "StatTrack/LiveGameVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "StatTrack/LiveGameVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "StatTrack/LiveGameVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
+            startingLineNumber = "445"
+            endingLineNumber = "445"
             landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -190,8 +190,8 @@
             filePath = "StatTrack/LiveGameVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "428"
-            endingLineNumber = "428"
+            startingLineNumber = "446"
+            endingLineNumber = "446"
             landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -206,8 +206,24 @@
             filePath = "StatTrack/LiveGameVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E61D7836-92AF-49E1-B3B6-407B630F5158"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StatTrack/LiveGameVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "drawAfterPerformingCalculations(onDetections:withImageSize:withImage:)"
             landmarkType = "7">
          </BreakpointContent>

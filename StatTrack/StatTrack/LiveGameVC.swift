@@ -291,14 +291,21 @@ extension LiveGameVC: CameraFeedManagerDelegate {
 
     var objectOverlays: [ObjectOverlay] = []
 
+      var seenNet = false
+      var seenRim = false
+      var seenBall = false
+      var playerCount = 0
+      
       for detection in detections {
-          
+
           guard let category = detection.categories.first else { continue }
+          print(category.label)
+          print(category.score)
           // Translates bounding box rect to current view.
           var convertedRect = detection.boundingBox.applying(
             CGAffineTransform(
-                scaleX: self.overlayView.bounds.size.width / imageSize.width,
-                y: self.overlayView.bounds.size.height / imageSize.height))
+                scaleX: self.previewView.viewWidth / imageSize.width,
+                y: self.previewView.viewHeight / imageSize.height))
           
           if convertedRect.origin.x < 0 {
               convertedRect.origin.x = self.edgeOffset
@@ -322,10 +329,17 @@ extension LiveGameVC: CameraFeedManagerDelegate {
           let maxObjectWidthThreshold = self.overlayView.frame.width / 4
           let maxPlayerWidthThreshold = self.overlayView.frame.width / 3
           
-          if !((category.label == "ball" || category.label == "net" || category.label == "rim") &&
-               convertedRect.maxX - convertedRect.origin.x > maxObjectWidthThreshold) &&
-                !((category.label == "player") && convertedRect.maxX - convertedRect.origin.x > maxPlayerWidthThreshold){
-              
+          let isTroublesomeLabel = (category.label == "ball" || category.label == "net" || category.label == "rim")
+          let exceedsWidthThreshold = convertedRect.maxX - convertedRect.origin.x > maxObjectWidthThreshold
+          let exceedsPlayerWidthThreshold = convertedRect.maxX - convertedRect.origin.x > maxPlayerWidthThreshold
+          let detectionIsReasonableSize =  !(isTroublesomeLabel && exceedsWidthThreshold) && !((category.label == "player") && exceedsPlayerWidthThreshold)
+          
+          // Only show the highest confidence rim, net, and ball
+          let seenRimAndIsRim = category.label == "rim" && seenRim == true
+          let seenNetAndIsNet = category.label == "net" && seenNet == true
+          let seenBallAndIsBall = category.label == "ball" && seenBall == true
+          
+          if detectionIsReasonableSize && !seenRimAndIsRim && !seenNetAndIsNet && !seenBallAndIsBall && playerCount < 10 {
               var objectDescription = String(
                 format: "\(category.label ?? "Unknown") (%.2f)",
                 category.score)
@@ -343,13 +357,17 @@ extension LiveGameVC: CameraFeedManagerDelegate {
               switch category.label {
                   
               case "player":
+                  playerCount += 1
                   break // To be written in MVP
               case "ball":
                   gameState.updateBallCoordinates(xCoord:xCoord, yCoord:yCoord)
+                  seenBall = true
               case "rim":
                   gameState.updateRimCoordinates(xCoord:xCoord, yCoord:yCoord)
+                  seenRim = true
               case "net":
                   gameState.updateNetCoordinates(xCoord:xCoord, yCoord:yCoord)
+                  seenNet = true
               default:
                   break
               }
@@ -363,20 +381,20 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                   
                   var imgPlayerCoords = convertedRect.applying(
                     CGAffineTransform(
-                        scaleX: imageSize.width / self.overlayView.bounds.size.width,
-                        y: imageSize.height / self.overlayView.bounds.size.height))
+                        scaleX: imageSize.width / self.previewView.viewWidth,
+                        y: imageSize.height / self.previewView.viewHeight))
 
                   // CIImage coordinates have the origin in the bottom left instead of top left
                   imgPlayerCoords.origin.y = imageSize.height - imgPlayerCoords.origin.y - imgPlayerCoords.size.height
 
-                  //  let ogImgCrop = img.cropped(to: imgPlayerCoords)
+                    let ogImgCrop = img.cropped(to: imgPlayerCoords)
                   
                   imgPlayerCoords.origin.x = imgPlayerCoords.origin.x + imgPlayerCoords.size.width / 3
                   imgPlayerCoords.origin.y = imgPlayerCoords.origin.y + imgPlayerCoords.size.height * (2/3)
                   imgPlayerCoords.size.height = imgPlayerCoords.size.height / 5
                   imgPlayerCoords.size.width = imgPlayerCoords.size.width / 3
                   
-                  // let afterSecondCrop = img.cropped(to: imgPlayerCoords)
+                   let afterSecondCrop = img.cropped(to: imgPlayerCoords)
                   
                   // take a slice of the player's bounding box
                   let inputExtent = CIVector(x: imgPlayerCoords.origin.x, y:imgPlayerCoords.origin.y, z: imgPlayerCoords.size.width, w: imgPlayerCoords.size.height)
@@ -399,10 +417,10 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                   // print(awayColorDifference)
                   
                   // Uncomment these to show which pixels represent the shirt of each player
-                  // convertedRect.origin.x = convertedRect.origin.x + convertedRect.size.width / 3
-                  // convertedRect.origin.y = convertedRect.origin.y + convertedRect.size.height * (1/3)
-                  // convertedRect.size.height = convertedRect.size.height / 5
-                  // convertedRect.size.width = convertedRect.size.width / 3
+//                   convertedRect.origin.x = convertedRect.origin.x + convertedRect.size.width / 3
+//                   convertedRect.origin.y = convertedRect.origin.y + convertedRect.size.height * (1/3)
+//                   convertedRect.size.height = convertedRect.size.height / 5
+//                   convertedRect.size.width = convertedRect.size.width / 3
 
                   if homeColorDifference < awayColorDifference {
                       displayColor = homeColor
@@ -469,6 +487,6 @@ struct ConstantsDefault {
   static let modelType: ModelType = .model_v1
   static let threadCount = 1
     static let scoreThreshold: Float = 0.2
-  static let maxResults: Int = 10
+  static let maxResults: Int = 40
   static let theadCountLimit = 10
 }
