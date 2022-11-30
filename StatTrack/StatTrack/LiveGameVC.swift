@@ -299,8 +299,7 @@ extension LiveGameVC: CameraFeedManagerDelegate {
       for detection in detections {
 
           guard let category = detection.categories.first else { continue }
-          print(category.label)
-          print(category.score)
+
           // Translates bounding box rect to current view.
           var convertedRect = detection.boundingBox.applying(
             CGAffineTransform(
@@ -387,14 +386,14 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                   // CIImage coordinates have the origin in the bottom left instead of top left
                   imgPlayerCoords.origin.y = imageSize.height - imgPlayerCoords.origin.y - imgPlayerCoords.size.height
 
-                    let ogImgCrop = img.cropped(to: imgPlayerCoords)
+//                    let ogImgCrop = img.cropped(to: imgPlayerCoords)
                   
                   imgPlayerCoords.origin.x = imgPlayerCoords.origin.x + imgPlayerCoords.size.width / 3
                   imgPlayerCoords.origin.y = imgPlayerCoords.origin.y + imgPlayerCoords.size.height * (2/3)
                   imgPlayerCoords.size.height = imgPlayerCoords.size.height / 5
                   imgPlayerCoords.size.width = imgPlayerCoords.size.width / 3
                   
-                   let afterSecondCrop = img.cropped(to: imgPlayerCoords)
+//                   let afterSecondCrop = img.cropped(to: imgPlayerCoords)
                   
                   // take a slice of the player's bounding box
                   let inputExtent = CIVector(x: imgPlayerCoords.origin.x, y:imgPlayerCoords.origin.y, z: imgPlayerCoords.size.width, w: imgPlayerCoords.size.height)
