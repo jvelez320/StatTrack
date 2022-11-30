@@ -91,7 +91,7 @@ struct GameState {
     var currentTime: Double? = nil
     var teamAHasOfficialPossesion: Bool = false
     var recentShotAttempt: Date = Date().advanced(by: -4) // 3 second buffer if becomes true
-    var recentMadeShot: Bool = false // 3 second buffer if becomes true
+	var recentMadeShot: Date = Date().advanced(by: -4) // 3 second buffer if becomes true
     
     var teamA: Team? = nil
     var teamB: Team? = nil
@@ -102,18 +102,41 @@ struct GameState {
 //    let db = try Connection(fileURL.path)
     
     mutating func checkShotAttempt() -> Bool {
+		// TODO: fine tune this parameter
+		let threshold: CGFloat = 70
         if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY {
-            if (ballCenterY > rimCenterY && abs(ballCenterX - rimCenterX) < 100) {
+            if (ballCenterY > rimCenterY && abs(ballCenterX - rimCenterX) < threshold) {
                 if (Date() > recentShotAttempt.advanced(by: 3)) {
                     recentShotAttempt = Date()
+					// Checking for new shot attempts only: old code returned true no matter the time difference
+					return true
                 }
-                return true
             }
         }
         return false
     }
-    mutating func checkMadeBasket() -> Bool {
-        return false
+    mutating func checkMadeBasket() -> Bool? {
+		// TODO: fine tune these parameters
+		let heightThreshold: CGFloat = 5
+		let distanceThreshold: CGFloat = 20
+		if Date() < recentMadeShot.advanced(by: 3) {
+			return nil
+		}
+
+		if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY, let ballHeight = ball.height, let rimHeight = rim.height {
+			if ballCenterY < rimCenterY && Date() < recentShotAttempt.advanced(by: 3) {
+				if abs(ballHeight - rimHeight) < heightThreshold && abs(ballCenterX - rimCenterX) < distanceThreshold {
+					recentMadeShot = Date()
+					// Checking for new shot attempts only: old code returned true no matter the time difference
+					return true
+				} else {
+					recentMadeShot = Date()
+					return false // miss
+				}
+			}
+		}
+		
+		return nil
     }
     mutating func checkPossesionChange() -> Bool {
         return false
@@ -125,6 +148,10 @@ struct GameState {
         ball.centerX = xCoord
         ball.centerY = yCoord
     }
+	mutating func updateBallSize(height: Double, width: Double) {
+		ball.height = height
+		ball.width = width
+	}
     func updatePlayersCoordinates() {
     
     }
@@ -132,11 +159,18 @@ struct GameState {
         rim.centerX = xCoord
         rim.centerY = yCoord
     }
+	mutating func updateRimSize(height: Double, width: Double) {
+		rim.height = height
+		rim.width = width
+	}
     mutating func updateNetCoordinates(xCoord: Double, yCoord: Double) {
         net.centerX = xCoord
         net.centerY = yCoord
     }
-    
+	mutating func updateNetSize(height: Double, width: Double) {
+		net.height = height
+		net.width = width
+	}
 }
 
 extension GameState {
@@ -159,14 +193,20 @@ struct Team {
 struct Ball {
     var centerX: Double? = nil
     var centerY: Double? = nil
+	var height: Double? = nil
+	var width: Double? = nil
 }
 
 struct Rim {
     var centerX: Double? = nil
     var centerY: Double? = nil
+	var height: Double? = nil
+	var width: Double? = nil
 }
 
 struct Net {
     var centerX: Double? = nil
     var centerY: Double? = nil
+	var height: Double? = nil
+	var width: Double? = nil
 }
