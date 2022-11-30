@@ -81,7 +81,6 @@ final class LiveGameVC: UIViewController {
     scoreThreshold: ConstantsDefault.scoreThreshold,
     maxResults: ConstantsDefault.maxResults
     )
-    //  private var inferenceViewController: InferenceViewController?
 
     // MARK: View Handling Methods
     override func viewDidLoad() {
@@ -91,8 +90,6 @@ final class LiveGameVC: UIViewController {
         }
         cameraFeedManager.delegate = self
         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
-    //    overlayView.clearsContextBeforeDrawing = true
-    //    addPanGesture()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -171,59 +168,8 @@ final class LiveGameVC: UIViewController {
 
       self.present(alert, animated: true)
   }
-
-  // MARK: Storyboard Segue Handlers
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      super.prepare(for: segue, sender: sender)
-
-      if segue.identifier == "EMBED" {
-//      inferenceViewController = segue.destination as? InferenceViewController
-
-//      inferenceViewController?.currentThreadCount = threadCount
-//      inferenceViewController?.maxResults = maxResults
-//      inferenceViewController?.scoreThreshold = scoreThreshold
-//      inferenceViewController?.modelSelectIndex =
-//        ModelType.allCases.firstIndex(where: { $0 == detectionModel }) ?? 0
-//      inferenceViewController?.delegate = self
-
-//      guard let tempResult = result else {
-//        return
-//      }
-//      inferenceViewController?.inferenceTime = tempResult.inferenceTime
-      }
-    }
 }
 
-// MARK: InferenceViewControllerDelegate Methods
-//extension LiveGameVC: InferenceViewControllerDelegate {
-//  func viewController(
-//    _ viewController: InferenceViewController,
-//    didReceiveAction action: InferenceViewController.Action
-//  ) {
-//    switch action {
-//    case .changeThreadCount(let threadCount):
-//      if self.threadCount == threadCount { return }
-//      self.threadCount = threadCount
-//    case .changeMaxResults(let maxResults):
-//      if self.maxResults == maxResults { return }
-//      self.maxResults = maxResults
-//    case .changeModel(let detectionModel):
-//      if self.detectionModel == detectionModel { return }
-//      self.detectionModel = detectionModel
-//    case .changeScoreThreshold(let scoreThreshold):
-//      if self.scoreThreshold == scoreThreshold { return }
-//      self.scoreThreshold = scoreThreshold
-//    }
-//    inferenceQueue.async {
-//      self.objectDetectionHelper = ObjectDetectionHelper(
-//        modelFileInfo: self.detectionModel.modelFileInfo,
-//        threadCount: self.threadCount,
-//        scoreThreshold: self.scoreThreshold,
-//        maxResults: self.maxResults
-//      )
-//    }
-//  }
-//}
 
 // MARK: CameraFeedManagerDelegate Methods
 extension LiveGameVC: CameraFeedManagerDelegate {
@@ -310,15 +256,10 @@ extension LiveGameVC: CameraFeedManagerDelegate {
 
       DispatchQueue.main.async { [self] in
 
-      // Display results by handing off to the InferenceViewController
-//      self.inferenceViewController?.resolution = CGSize(width: width, height: height)
-
       var inferenceTime: Double = 0
       if let resultInferenceTime = self.result?.inferenceTime {
         inferenceTime = resultInferenceTime
       }
-//      self.inferenceViewController?.inferenceTime = inferenceTime
-//      self.inferenceViewController?.tableView.reloadData()
         
         //Remove shot attempt label if its been too long
         if (Date() > self.gameState.recentShotAttempt.advanced(by: 3)) {
@@ -326,7 +267,6 @@ extension LiveGameVC: CameraFeedManagerDelegate {
         }
 
         let cameraImage = CIImage(cvPixelBuffer: pixelBuffer)
-        
       // Draws the bounding boxes and displays class names and confidence scores.
       self.drawAfterPerformingCalculations(
         onDetections: displayResult.detections,
@@ -360,6 +300,18 @@ extension LiveGameVC: CameraFeedManagerDelegate {
             CGAffineTransform(
                 scaleX: self.overlayView.bounds.size.width / imageSize.width,
                 y: self.overlayView.bounds.size.height / imageSize.height))
+          
+          var originalImageRect = detection.boundingBox
+          
+          let ogImgCrop = img.cropped(to: originalImageRect)
+          
+          var tempCrop = originalImageRect
+          tempCrop.origin.x = tempCrop.origin.x + tempCrop.size.width / 2
+          tempCrop.origin.y = tempCrop.origin.y + tempCrop.size.height / 3
+          tempCrop.size.height = tempCrop.size.height / 8
+          tempCrop.size.width = tempCrop.size.width / 5
+          
+          let tempImg = img.cropped(to: tempCrop)
           
           if convertedRect.origin.x < 0 {
               convertedRect.origin.x = self.edgeOffset
@@ -422,23 +374,17 @@ extension LiveGameVC: CameraFeedManagerDelegate {
               }
 
               if (category.label == "player"){
-                  // get approximately the shirt area of the player's bounding box
-                  let adjustedCenterX = convertedRect.origin.x + convertedRect.size.width / 3
-                  let adjustedCenterY = convertedRect.origin.y + convertedRect.size.height / 5
-                  let adjustedCenterWidth = convertedRect.size.width / 4
-                  let adjustedCenterHeight = convertedRect.size.height / 3
-
                   // take a slice of the player's bounding box
-                  let inputExtent = CIVector(x: adjustedCenterX, y: adjustedCenterY, z: adjustedCenterWidth, w: adjustedCenterHeight)
+                  let inputExtent = CIVector(x: tempCrop.origin.x, y:tempCrop.origin.y, z: tempCrop.size.width, w: tempCrop.size.height)
 
                   // get the average pixel value of this predicted shirt area
                   let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: img, kCIInputExtentKey: inputExtent])!
                   let outputPixelCI = filter.outputImage!
-                  
+
                   // convert it to UIColor
                   var bitmap = [UInt8](repeating: 0, count: 4)
-                  let context = CIContext(options: [.workingColorSpace: kCFNull])
-                  context.render(outputPixelCI, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
+                  let context = CIContext(options: [.workingColorSpace: kCFNull as Any])
+                  context.render(outputPixelCI, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: CIFormat.RGBA8, colorSpace: CGColorSpaceCreateDeviceRGB())
                   let playerDetectedJerseyColor = UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
                   
                   // compare the color with home and away, and label the player with the most similar color. CIE94 is a color comparison algo.
@@ -448,6 +394,11 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                   // print(homeColorDifference)
                   // print(awayColorDifference)
                   
+                  convertedRect.origin.x = convertedRect.origin.x + convertedRect.size.width / 2
+                  convertedRect.origin.y = convertedRect.origin.y + convertedRect.size.height / 3
+                  convertedRect.size.height = convertedRect.size.height / 8
+                  convertedRect.size.width = convertedRect.size.width / 5
+                  
                   if homeColorDifference < awayColorDifference {
                       displayColor = homeColor
                       objectDescription = String(format: "\(homeName) \(category.label ?? "Unknown") (%.2f)", category.score)
@@ -456,6 +407,7 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                       displayColor = awayColor
                       objectDescription = String(format: "\(awayName) \(category.label ?? "Unknown") (%.2f)", category.score)
                   }
+//                  displayColor = playerDetectedJerseyColor
               }
               
               let objectOverlay = ObjectOverlay(
@@ -479,139 +431,6 @@ extension LiveGameVC: CameraFeedManagerDelegate {
     self.overlayView.objectOverlays = objectOverlays
     self.overlayView.setNeedsDisplay()
   }
-
-}
-
-// MARK: Bottom Sheet Interaction Methods
-extension LiveGameVC {
-
-  // MARK: Bottom Sheet Interaction Methods
-  /**
-   This method adds a pan gesture to make the bottom sheet interactive.
-   */
-//  private func addPanGesture() {
-//    let panGesture = UIPanGestureRecognizer(
-//      target: self, action: #selector(LiveGameVC.didPan(panGesture:)))
-//    bottomSheetView.addGestureRecognizer(panGesture)
-//  }
-//
-//  /** Change whether bottom sheet should be in expanded or collapsed state.
-//   */
-//  private func changeBottomViewState() {
-//    guard let inferenceVC = inferenceViewController else {
-//      return
-//    }
-//
-//    if bottomSheetViewBottomSpace.constant == inferenceVC.collapsedHeight
-//      - bottomSheetView.bounds.size.height
-//    {
-//      bottomSheetViewBottomSpace.constant = 0.0
-//    } else {
-//      bottomSheetViewBottomSpace.constant =
-//        inferenceVC.collapsedHeight - bottomSheetView.bounds.size.height
-//    }
-//    setImageBasedOnBottomViewState()
-//  }
-
-  /**
-   Set image of the bottom sheet icon based on whether it is expanded or collapsed
-   */
-//  private func setImageBasedOnBottomViewState() {
-//    if bottomSheetViewBottomSpace.constant == 0.0 {
-//      bottomSheetStateImageView.image = UIImage(named: "down_icon")
-//    } else {
-//      bottomSheetStateImageView.image = UIImage(named: "up_icon")
-//    }
-//  }
-
-  /**
-   This method responds to the user panning on the bottom sheet.
-   */
-//  @objc func didPan(panGesture: UIPanGestureRecognizer) {
-//    // Opens or closes the bottom sheet based on the user's interaction with the bottom sheet.
-//    let translation = panGesture.translation(in: view)
-//
-//    switch panGesture.state {
-//    case .began:
-//      initialBottomSpace = bottomSheetViewBottomSpace.constant
-//      translateBottomSheet(withVerticalTranslation: translation.y)
-//    case .changed:
-//      translateBottomSheet(withVerticalTranslation: translation.y)
-//    case .cancelled:
-//      setBottomSheetLayout(withBottomSpace: initialBottomSpace)
-//    case .ended:
-//      translateBottomSheetAtEndOfPan(withVerticalTranslation: translation.y)
-//      setImageBasedOnBottomViewState()
-//      initialBottomSpace = 0.0
-//    default:
-//      break
-//    }
-//  }
-
-  /**
-   This method sets bottom sheet translation while pan gesture state is continuously changing.
-   */
-//  private func translateBottomSheet(withVerticalTranslation verticalTranslation: CGFloat) {
-//    let bottomSpace = initialBottomSpace - verticalTranslation
-//    guard
-//      (bottomSpace <= 0.0)
-//        && (bottomSpace >=
-//          inferenceViewController!.collapsedHeight - bottomSheetView.bounds.size.height)
-//    else {
-//      return
-//    }
-//    setBottomSheetLayout(withBottomSpace: bottomSpace)
-//  }
-
-  /**
-   This method changes bottom sheet state to either fully expanded or closed at the end of pan.
-   */
-//  private func translateBottomSheetAtEndOfPan(withVerticalTranslation verticalTranslation: CGFloat)
-//  {
-//
-//    // Changes bottom sheet state to either fully open or closed at the end of pan.
-//    let bottomSpace = bottomSpaceAtEndOfPan(withVerticalTranslation: verticalTranslation)
-//    setBottomSheetLayout(withBottomSpace: bottomSpace)
-//  }
-//
-//  /**
-//   Return the final state of the bottom sheet view (whether fully collapsed or expanded) that is to be retained.
-//   */
-//  private func bottomSpaceAtEndOfPan(withVerticalTranslation verticalTranslation: CGFloat)
-//    -> CGFloat
-//  {
-//
-//    // Calculates whether to fully expand or collapse bottom sheet when pan gesture ends.
-//    var bottomSpace = initialBottomSpace - verticalTranslation
-//
-//    var height: CGFloat = 0.0
-//    if initialBottomSpace == 0.0 {
-//      height = bottomSheetView.bounds.size.height
-//    } else {
-//      height = inferenceViewController!.collapsedHeight
-//    }
-//
-//    let currentHeight = bottomSheetView.bounds.size.height + bottomSpace
-//
-//    if currentHeight - height <= collapseTransitionThreshold {
-//      bottomSpace = inferenceViewController!.collapsedHeight - bottomSheetView.bounds.size.height
-//    } else if currentHeight - height >= expandTransitionThreshold {
-//      bottomSpace = 0.0
-//    } else {
-//      bottomSpace = initialBottomSpace
-//    }
-//
-//    return bottomSpace
-//  }
-
-  /**
-   This method layouts the change of the bottom space of bottom sheet with respect to the view managed by this controller.
-   */
-//  func setBottomSheetLayout(withBottomSpace bottomSpace: CGFloat) {
-//    view.setNeedsLayout()
-//    bottomSheetViewBottomSpace.constant = bottomSpace
-//    view.setNeedsLayout()
-//  }
 
 }
 
@@ -649,32 +468,3 @@ struct ConstantsDefault {
   static let maxResults: Int = 10
   static let theadCountLimit = 10
 }
-
-//extension CIImage {
-//    public convenience init?(pixelBuffer: CVPixelBuffer) {
-//        var cgImage: CGImage?
-//        VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
-//
-//        guard let cgImage = cgImage else {
-//            return nil
-//        }
-//
-//        self.init(cgImage: cgImage)
-//    }
-//}
-
-//extension UIImage {
-//    var averageColor: UIColor? {
-//        guard let inputImage = CIImage(image: self) else { return nil }
-//        let extentVector = CIVector(x: inputImage.extent.origin.x, y: inputImage.extent.origin.y, z: inputImage.extent.size.width, w: inputImage.extent.size.height)
-//
-//        guard let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector]) else { return nil }
-//        guard let outputImage = filter.outputImage else { return nil }
-//
-//        var bitmap = [UInt8](repeating: 0, count: 4)
-//        let context = CIContext(options: [.workingColorSpace: kCFNull])
-//        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
-//
-//        return UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
-//    }
-//}
