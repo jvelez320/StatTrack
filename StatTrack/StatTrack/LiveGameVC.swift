@@ -294,24 +294,11 @@ extension LiveGameVC: CameraFeedManagerDelegate {
       for detection in detections {
           
           guard let category = detection.categories.first else { continue }
-          
           // Translates bounding box rect to current view.
           var convertedRect = detection.boundingBox.applying(
             CGAffineTransform(
                 scaleX: self.overlayView.bounds.size.width / imageSize.width,
                 y: self.overlayView.bounds.size.height / imageSize.height))
-          
-          var originalImageRect = detection.boundingBox
-          
-          let ogImgCrop = img.cropped(to: originalImageRect)
-          
-          var tempCrop = originalImageRect
-          tempCrop.origin.x = tempCrop.origin.x + tempCrop.size.width / 2
-          tempCrop.origin.y = tempCrop.origin.y + tempCrop.size.height / 3
-          tempCrop.size.height = tempCrop.size.height / 8
-          tempCrop.size.width = tempCrop.size.width / 5
-          
-          let tempImg = img.cropped(to: tempCrop)
           
           if convertedRect.origin.x < 0 {
               convertedRect.origin.x = self.edgeOffset
@@ -338,7 +325,6 @@ extension LiveGameVC: CameraFeedManagerDelegate {
           if !((category.label == "ball" || category.label == "net" || category.label == "rim") &&
                convertedRect.maxX - convertedRect.origin.x > maxObjectWidthThreshold) &&
                 !((category.label == "player") && convertedRect.maxX - convertedRect.origin.x > maxPlayerWidthThreshold){
-              
               
               var objectDescription = String(
                 format: "\(category.label ?? "Unknown") (%.2f)",
@@ -374,8 +360,26 @@ extension LiveGameVC: CameraFeedManagerDelegate {
               }
 
               if (category.label == "player"){
+                  
+                  var imgPlayerCoords = convertedRect.applying(
+                    CGAffineTransform(
+                        scaleX: imageSize.width / self.overlayView.bounds.size.width,
+                        y: imageSize.height / self.overlayView.bounds.size.height))
+
+                  // CIImage coordinates have the origin in the bottom left instead of top left
+                  imgPlayerCoords.origin.y = imageSize.height - imgPlayerCoords.origin.y - imgPlayerCoords.size.height
+
+                  //  let ogImgCrop = img.cropped(to: imgPlayerCoords)
+                  
+                  imgPlayerCoords.origin.x = imgPlayerCoords.origin.x + imgPlayerCoords.size.width / 3
+                  imgPlayerCoords.origin.y = imgPlayerCoords.origin.y + imgPlayerCoords.size.height * (2/3)
+                  imgPlayerCoords.size.height = imgPlayerCoords.size.height / 5
+                  imgPlayerCoords.size.width = imgPlayerCoords.size.width / 3
+                  
+                  // let afterSecondCrop = img.cropped(to: imgPlayerCoords)
+                  
                   // take a slice of the player's bounding box
-                  let inputExtent = CIVector(x: tempCrop.origin.x, y:tempCrop.origin.y, z: tempCrop.size.width, w: tempCrop.size.height)
+                  let inputExtent = CIVector(x: imgPlayerCoords.origin.x, y:imgPlayerCoords.origin.y, z: imgPlayerCoords.size.width, w: imgPlayerCoords.size.height)
 
                   // get the average pixel value of this predicted shirt area
                   let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: img, kCIInputExtentKey: inputExtent])!
@@ -394,11 +398,12 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                   // print(homeColorDifference)
                   // print(awayColorDifference)
                   
-                  convertedRect.origin.x = convertedRect.origin.x + convertedRect.size.width / 2
-                  convertedRect.origin.y = convertedRect.origin.y + convertedRect.size.height / 3
-                  convertedRect.size.height = convertedRect.size.height / 8
-                  convertedRect.size.width = convertedRect.size.width / 5
-                  
+                  // Uncomment these to show which pixels represent the shirt of each player
+                  // convertedRect.origin.x = convertedRect.origin.x + convertedRect.size.width / 3
+                  // convertedRect.origin.y = convertedRect.origin.y + convertedRect.size.height * (1/3)
+                  // convertedRect.size.height = convertedRect.size.height / 5
+                  // convertedRect.size.width = convertedRect.size.width / 3
+
                   if homeColorDifference < awayColorDifference {
                       displayColor = homeColor
                       objectDescription = String(format: "\(homeName) \(category.label ?? "Unknown") (%.2f)", category.score)
@@ -407,7 +412,6 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                       displayColor = awayColor
                       objectDescription = String(format: "\(awayName) \(category.label ?? "Unknown") (%.2f)", category.score)
                   }
-//                  displayColor = playerDetectedJerseyColor
               }
               
               let objectOverlay = ObjectOverlay(
