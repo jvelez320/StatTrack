@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RA4-YW-yMo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RA4-YW-yMo">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -116,7 +115,7 @@
                                 <rect key="frame" x="703" y="230" width="36" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </colorWell>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Setup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" id="ucs-5x-u5h">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Game Setup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" id="ucs-5x-u5h">
                                 <rect key="frame" x="411" y="38" width="94.5" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -265,7 +264,7 @@
                         <constraints>
                             <constraint firstItem="W0y-q6-Sri" firstAttribute="top" secondItem="HUv-3K-Lwa" secondAttribute="bottom" id="5RY-O3-SLa"/>
                             <constraint firstItem="53w-yT-EvM" firstAttribute="centerY" secondItem="FO8-Bf-DjZ" secondAttribute="centerY" id="62f-4a-FbT"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="din-yN-RZu" secondAttribute="trailing" symbolic="YES" id="Ckr-Mj-xBH"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="din-yN-RZu" secondAttribute="trailing" constant="20" symbolic="YES" id="Ckr-Mj-xBH"/>
                             <constraint firstItem="qA7-SR-dIQ" firstAttribute="bottom" secondItem="vFp-JV-rPG" secondAttribute="top" id="UWD-mw-nCI"/>
                             <constraint firstItem="W0y-q6-Sri" firstAttribute="trailing" secondItem="FO8-Bf-DjZ" secondAttribute="trailing" id="YI7-fK-b30"/>
                             <constraint firstItem="TvV-Du-Pis" firstAttribute="centerX" secondItem="FO8-Bf-DjZ" secondAttribute="centerX" id="YS0-Sd-4v4"/>

@@ -84,7 +84,7 @@ class CameraFeedManager: NSObject {
     session.sessionPreset = .high
     self.previewView.session = session
     self.previewView.previewLayer.connection?.videoOrientation = .portrait
-    self.previewView.previewLayer.videoGravity = .resizeAspectFill
+    self.previewView.previewLayer.videoGravity = .resize
     self.attemptToConfigureSession()
   }
 
