@@ -261,8 +261,9 @@ extension LiveGameVC: CameraFeedManagerDelegate {
         inferenceTime = resultInferenceTime
       }
         
-        //Remove shot attempt label if its been too long
-        if (Date() > self.gameState.recentShotAttempt.advanced(by: 3)) {
+        //Remove shot attempt/made label if its been too long
+		// TODO: verify this condition through testing
+        if (Date() > self.gameState.recentShotAttempt.advanced(by: 3) && Date() > self.gameState.recentMadeShot.advanced(by: 3)) {
             self.gameEventLabel.text = ""
         }
 
@@ -360,12 +361,15 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                   break // To be written in MVP
               case "ball":
                   gameState.updateBallCoordinates(xCoord:xCoord, yCoord:yCoord)
+                  gameState.updateBallSize(height: convertedRect.size.height, width: convertedRect.size.width)
                   seenBall = true
               case "rim":
                   gameState.updateRimCoordinates(xCoord:xCoord, yCoord:yCoord)
+				          gameState.updateRimSize(height: convertedRect.size.height, width: convertedRect.size.width)
                   seenRim = true
               case "net":
                   gameState.updateNetCoordinates(xCoord:xCoord, yCoord:yCoord)
+				          gameState.updateNetSize(height: convertedRect.size.height, width: convertedRect.size.width)
                   seenNet = true
               default:
                   break
@@ -375,6 +379,14 @@ extension LiveGameVC: CameraFeedManagerDelegate {
               if (shouldDrawShotLabel) {
                   gameEventLabel.text = "Shot Attempted"
               }
+			  
+			  if let shouldDrawShotMadeMissed = gameState.checkMadeBasket() {
+				  if shouldDrawShotMadeMissed {
+					  gameEventLabel.text = "Shot Made"
+				  } else {
+					  gameEventLabel.text = "Shot Missed"
+				  }
+			  }
 
               if (category.label == "player"){
                   
