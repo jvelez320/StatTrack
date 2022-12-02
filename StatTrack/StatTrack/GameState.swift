@@ -89,12 +89,12 @@ func initiailizeDB() -> () {
 
 struct GameState {
     var currentTime: Double? = nil
-    var teamAHasOfficialPossesion: Bool = false
+    var teamAHasOfficialPossesion: Bool? = nil
     var recentShotAttempt: Date = Date().advanced(by: -4) // 3 second buffer if becomes true
 	var recentMadeShot: Date = Date().advanced(by: -4) // 3 second buffer if becomes true
     
-    var teamA: Team? = nil
-    var teamB: Team? = nil
+    var teamA: Team
+    var teamB: Team
     var ball: Ball
     var rim: Rim
     var net: Net
@@ -138,8 +138,38 @@ struct GameState {
 		
 		return nil
     }
-    mutating func checkPossesionChange() -> Bool {
-        return false
+	mutating func updateOfficialPossesion(teamACoords: [(Double, Double)], teamBCoords: [(Double, Double)]) -> Void {
+		if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY {
+			var teamAHasCurrentPossession = false
+			var minDistance = Double.greatestFiniteMagnitude
+			for coordPair in teamACoords {
+				let currDistance = sqrt(pow(coordPair.0 - ballCenterX, 2) + pow(coordPair.1 - ballCenterY, 2))
+				if currDistance < minDistance {
+					teamAHasCurrentPossession = true
+					minDistance = currDistance
+				}
+			}
+			
+			for coordPair in teamBCoords {
+				let currDistance = sqrt(pow(coordPair.0 - ballCenterX, 2) + pow(coordPair.1 - ballCenterY, 2))
+				if currDistance < minDistance {
+					teamAHasCurrentPossession = false
+					break
+				}
+			}
+			
+			if teamAHasCurrentPossession {
+				teamA.perceivedPossession = Date()
+				if Date() > teamB.perceivedPossession.advanced(by: 3) {
+					teamAHasOfficialPossesion = true
+				}
+			} else {
+				teamB.perceivedPossession = Date()
+				if Date() > teamA.perceivedPossession.advanced(by: 3) {
+					teamAHasOfficialPossesion = false
+				}
+			}
+		}
     }
     func determineWhichTeamShot() -> String {
         return "none"
@@ -178,16 +208,18 @@ extension GameState {
         ball = Ball()
         rim = Rim()
         net = Net()
+		teamA = Team()
+		teamB = Team()
         initiailizeDB()
     }
 }
 
 struct Team {
-    var name: String
-    var shirtColor: UIColor
-    var perceivedPossession: Double
-    var numMakes: Int
-    var numMisses: Int
+    var name: String = ""
+    var shirtColor: UIColor = UIColor()
+    var perceivedPossession: Date = Date()
+    var numMakes: Int = 0
+    var numMisses: Int = 0
 }
 
 struct Ball {

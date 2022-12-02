@@ -25,7 +25,7 @@ import VideoToolbox
 final class LiveGameVC: UIViewController {
     
     //GameState Object
-    private var gameState = GameState()
+	var gameState = GameState()
 
     //  // MARK: Storyboards Connections
     @IBOutlet weak var previewView: PreviewView!
@@ -296,7 +296,8 @@ extension LiveGameVC: CameraFeedManagerDelegate {
       var seenRim = false
       var seenBall = false
       var playerCount = 0
-      
+	  var teamACoords: [(Double, Double)] = []
+	  var teamBCoords: [(Double, Double)] = []
       for detection in detections {
 
           guard let category = detection.categories.first else { continue }
@@ -358,7 +359,60 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                   
               case "player":
                   playerCount += 1
-                  break // To be written in MVP
+				  var imgPlayerCoords = convertedRect.applying(
+					CGAffineTransform(
+						scaleX: imageSize.width / self.previewView.viewWidth,
+						y: imageSize.height / self.previewView.viewHeight))
+
+				  // CIImage coordinates have the origin in the bottom left instead of top left
+				  imgPlayerCoords.origin.y = imageSize.height - imgPlayerCoords.origin.y - imgPlayerCoords.size.height
+
+//                    let ogImgCrop = img.cropped(to: imgPlayerCoords)
+				  
+				  imgPlayerCoords.origin.x = imgPlayerCoords.origin.x + imgPlayerCoords.size.width / 3
+				  imgPlayerCoords.origin.y = imgPlayerCoords.origin.y + imgPlayerCoords.size.height * (2/3)
+				  imgPlayerCoords.size.height = imgPlayerCoords.size.height / 5
+				  imgPlayerCoords.size.width = imgPlayerCoords.size.width / 3
+				  
+//                   let afterSecondCrop = img.cropped(to: imgPlayerCoords)
+				  
+				  // take a slice of the player's bounding box
+				  let inputExtent = CIVector(x: imgPlayerCoords.origin.x, y:imgPlayerCoords.origin.y, z: imgPlayerCoords.size.width, w: imgPlayerCoords.size.height)
+
+				  // get the average pixel value of this predicted shirt area
+				  let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: img, kCIInputExtentKey: inputExtent])!
+				  let outputPixelCI = filter.outputImage!
+
+				  // convert it to UIColor
+				  var bitmap = [UInt8](repeating: 0, count: 4)
+				  let context = CIContext(options: [.workingColorSpace: kCFNull as Any])
+				  context.render(outputPixelCI, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: CIFormat.RGBA8, colorSpace: CGColorSpaceCreateDeviceRGB())
+				  let playerDetectedJerseyColor = UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
+				  
+				  // compare the color with home and away, and label the player with the most similar color. CIE94 is a color comparison algo.
+				  // color difference function from: https://github.com/Boris-Em/ColorKit#installation
+				  let homeColorDifference = playerDetectedJerseyColor.difference(from: homeColor, using: .CIE94)
+				  let awayColorDifference = playerDetectedJerseyColor.difference(from: awayColor, using: .CIE94)
+				  // print(homeColorDifference)
+				  // print(awayColorDifference)
+				  
+				  // Uncomment these to show which pixels represent the shirt of each player
+//                   convertedRect.origin.x = convertedRect.origin.x + convertedRect.size.width / 3
+//                   convertedRect.origin.y = convertedRect.origin.y + convertedRect.size.height * (1/3)
+//                   convertedRect.size.height = convertedRect.size.height / 5
+//                   convertedRect.size.width = convertedRect.size.width / 3
+
+				  if homeColorDifference < awayColorDifference {
+					  // if home team
+					  teamACoords.append((xCoord, yCoord))
+					  displayColor = homeColor
+					  objectDescription = String(format: "\(homeName) \(category.label ?? "Unknown") (%.2f)", category.score)
+				  } else {
+					  // if away team
+					  teamBCoords.append((xCoord, yCoord))
+					  displayColor = awayColor
+					  objectDescription = String(format: "\(awayName) \(category.label ?? "Unknown") (%.2f)", category.score)
+				  }
               case "ball":
                   gameState.updateBallCoordinates(xCoord:xCoord, yCoord:yCoord)
                   gameState.updateBallSize(height: convertedRect.size.height, width: convertedRect.size.width)
@@ -388,61 +442,6 @@ extension LiveGameVC: CameraFeedManagerDelegate {
 				  }
 			  }
 
-              if (category.label == "player"){
-                  
-                  var imgPlayerCoords = convertedRect.applying(
-                    CGAffineTransform(
-                        scaleX: imageSize.width / self.previewView.viewWidth,
-                        y: imageSize.height / self.previewView.viewHeight))
-
-                  // CIImage coordinates have the origin in the bottom left instead of top left
-                  imgPlayerCoords.origin.y = imageSize.height - imgPlayerCoords.origin.y - imgPlayerCoords.size.height
-
-//                    let ogImgCrop = img.cropped(to: imgPlayerCoords)
-                  
-                  imgPlayerCoords.origin.x = imgPlayerCoords.origin.x + imgPlayerCoords.size.width / 3
-                  imgPlayerCoords.origin.y = imgPlayerCoords.origin.y + imgPlayerCoords.size.height * (2/3)
-                  imgPlayerCoords.size.height = imgPlayerCoords.size.height / 5
-                  imgPlayerCoords.size.width = imgPlayerCoords.size.width / 3
-                  
-//                   let afterSecondCrop = img.cropped(to: imgPlayerCoords)
-                  
-                  // take a slice of the player's bounding box
-                  let inputExtent = CIVector(x: imgPlayerCoords.origin.x, y:imgPlayerCoords.origin.y, z: imgPlayerCoords.size.width, w: imgPlayerCoords.size.height)
-
-                  // get the average pixel value of this predicted shirt area
-                  let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: img, kCIInputExtentKey: inputExtent])!
-                  let outputPixelCI = filter.outputImage!
-
-                  // convert it to UIColor
-                  var bitmap = [UInt8](repeating: 0, count: 4)
-                  let context = CIContext(options: [.workingColorSpace: kCFNull as Any])
-                  context.render(outputPixelCI, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: CIFormat.RGBA8, colorSpace: CGColorSpaceCreateDeviceRGB())
-                  let playerDetectedJerseyColor = UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
-                  
-                  // compare the color with home and away, and label the player with the most similar color. CIE94 is a color comparison algo.
-                  // color difference function from: https://github.com/Boris-Em/ColorKit#installation
-                  let homeColorDifference = playerDetectedJerseyColor.difference(from: homeColor, using: .CIE94)
-                  let awayColorDifference = playerDetectedJerseyColor.difference(from: awayColor, using: .CIE94)
-                  // print(homeColorDifference)
-                  // print(awayColorDifference)
-                  
-                  // Uncomment these to show which pixels represent the shirt of each player
-//                   convertedRect.origin.x = convertedRect.origin.x + convertedRect.size.width / 3
-//                   convertedRect.origin.y = convertedRect.origin.y + convertedRect.size.height * (1/3)
-//                   convertedRect.size.height = convertedRect.size.height / 5
-//                   convertedRect.size.width = convertedRect.size.width / 3
-
-                  if homeColorDifference < awayColorDifference {
-                      displayColor = homeColor
-                      objectDescription = String(format: "\(homeName) \(category.label ?? "Unknown") (%.2f)", category.score)
-                  }
-                  else {
-                      displayColor = awayColor
-                      objectDescription = String(format: "\(awayName) \(category.label ?? "Unknown") (%.2f)", category.score)
-                  }
-              }
-              
               let objectOverlay = ObjectOverlay(
                 name: objectDescription, borderRect: convertedRect, nameStringSize: size,
                 color: displayColor,
@@ -451,6 +450,8 @@ extension LiveGameVC: CameraFeedManagerDelegate {
               objectOverlays.append(objectOverlay)
           }
       }
+	  
+	  gameState.updateOfficialPossesion(teamACoords: teamACoords, teamBCoords: teamBCoords)
 
     // Hands off drawing to the OverlayView
     self.draw(objectOverlays: objectOverlays)
