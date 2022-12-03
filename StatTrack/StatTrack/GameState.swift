@@ -105,7 +105,7 @@ struct GameState {
 		// TODO: fine tune this parameter
 		let threshold: CGFloat = 70
         if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY {
-            if (ballCenterY > rimCenterY && abs(ballCenterX - rimCenterX) < threshold) {
+            if (ballCenterY < rimCenterY && abs(ballCenterX - rimCenterX) < threshold) {
                 if (Date() > recentShotAttempt.advanced(by: 3)) {
                     recentShotAttempt = Date()
 					// Checking for new shot attempts only: old code returned true no matter the time difference
@@ -118,13 +118,20 @@ struct GameState {
     mutating func checkMadeBasket() -> Bool? {
 		// TODO: fine tune these parameters
 		let heightThreshold: CGFloat = 5
-		let distanceThreshold: CGFloat = 20
+		let distanceThreshold: CGFloat = 25
 		if Date() < recentMadeShot.advanced(by: 3) {
 			return nil
 		}
 
-		if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY, let ballHeight = ball.height, let rimHeight = rim.height {
-			if ballCenterY < rimCenterY && Date() < recentShotAttempt.advanced(by: 3) {
+		print("recentMadeShot: \(recentMadeShot)")
+		if let ballCenterX = ball .centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY, let ballHeight = ball.height, let rimHeight = rim.height {
+			print("ball coords: (\(ballCenterX), \(ballCenterY))")
+			print("rim coords: (\(rimCenterX), \(rimCenterY))")
+			print("recentShotAttempt: \(recentShotAttempt)")
+			print("current time: \(Date())")
+			if ballCenterY > rimCenterY && Date() < recentShotAttempt.advanced(by: 3) {
+				print("distance diff: \(abs(ballCenterX - rimCenterX))")
+				print("height diff: \(abs(ballHeight - rimHeight))")
 				if abs(ballHeight - rimHeight) < heightThreshold && abs(ballCenterX - rimCenterX) < distanceThreshold {
 					recentMadeShot = Date()
 					// Checking for new shot attempts only: old code returned true no matter the time difference
