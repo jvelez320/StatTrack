@@ -12,7 +12,8 @@ final class CameraSetupVC: UIViewController {
     
     @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var setupLabel: UILabel!
-        
+    @IBOutlet weak var InstrLabel: UILabel!
+
     var session: AVCaptureSession?
     let previewLayer = AVCaptureVideoPreviewLayer()
     
@@ -52,6 +53,7 @@ final class CameraSetupVC: UIViewController {
         
         goButton.layer.zPosition = 2
         setupLabel.layer.zPosition = 2
+        InstrLabel.layer.zPosition = 2
     }
     
     override func viewDidLayoutSubviews() {
