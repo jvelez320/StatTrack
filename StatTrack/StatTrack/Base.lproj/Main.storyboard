@@ -107,6 +107,10 @@
                             </colorWell>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Setup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" translatesAutoresizingMaskIntoConstraints="NO" id="ucs-5x-u5h">
                                 <rect key="frame" x="400.5" y="36" width="95" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="I5u-h8-UvZ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="95" id="l8c-eP-fQA"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -186,9 +190,9 @@
                                 <rect key="frame" x="380" y="48" width="136" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="dBL-6l-Gef"/>
-                                    <constraint firstAttribute="width" constant="136" id="nXk-CS-mHe"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="136" id="nXk-CS-mHe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" systemColor="systemBackgroundColor"/>
                             </label>
@@ -261,6 +265,10 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="din-yN-RZu">
                                 <rect key="frame" x="723" y="320.5" width="102.5" height="34.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34.5" id="eXf-Zu-yc5"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="102.5" id="vkZ-8H-68u"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="End Game"/>
                                 <connections>
@@ -272,7 +280,7 @@
                         <constraints>
                             <constraint firstItem="W0y-q6-Sri" firstAttribute="top" secondItem="HUv-3K-Lwa" secondAttribute="bottom" id="5RY-O3-SLa"/>
                             <constraint firstItem="53w-yT-EvM" firstAttribute="centerY" secondItem="FO8-Bf-DjZ" secondAttribute="centerY" id="62f-4a-FbT"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="din-yN-RZu" secondAttribute="trailing" symbolic="YES" id="Ckr-Mj-xBH"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="din-yN-RZu" secondAttribute="trailing" constant="20" symbolic="YES" id="Ckr-Mj-xBH"/>
                             <constraint firstItem="qA7-SR-dIQ" firstAttribute="bottom" secondItem="vFp-JV-rPG" secondAttribute="top" id="UWD-mw-nCI"/>
                             <constraint firstItem="W0y-q6-Sri" firstAttribute="trailing" secondItem="FO8-Bf-DjZ" secondAttribute="trailing" id="YI7-fK-b30"/>
                             <constraint firstItem="TvV-Du-Pis" firstAttribute="centerX" secondItem="FO8-Bf-DjZ" secondAttribute="centerX" id="YS0-Sd-4v4"/>
@@ -543,7 +551,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sGX-kN-LxA"/>
         <segue reference="8Oe-Zb-FIg"/>
     </inferredMetricsTieBreakers>
     <resources>
