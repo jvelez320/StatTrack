@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvw-HC-Qbd">
-                                <rect key="frame" x="385" y="175" width="126.5" height="64"/>
+                                <rect key="frame" x="384.5" y="175" width="127" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="JIb-8W-ars"/>
                                 </constraints>
@@ -509,9 +509,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3P7-8g-OVn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3P7-8g-OVn">
                                 <rect key="frame" x="755" y="40" width="75" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="D9i-Ce-KO8"/>
+                                    <constraint firstAttribute="width" constant="75" id="s5S-J9-1SK"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Replay"/>
                             </button>
@@ -522,6 +525,8 @@
                             <constraint firstItem="NP5-YA-Lkj" firstAttribute="top" secondItem="Sh7-ku-BZb" secondAttribute="bottom" constant="10" id="YAi-Mm-pDn"/>
                             <constraint firstItem="wMD-yi-SL2" firstAttribute="top" secondItem="MxO-HP-2CK" secondAttribute="bottom" constant="309" id="c8w-i8-R7O"/>
                             <constraint firstItem="MxO-HP-2CK" firstAttribute="leading" secondItem="Kcf-vl-3YP" secondAttribute="leading" constant="62" id="i77-Ga-qRK"/>
+                            <constraint firstItem="wMD-yi-SL2" firstAttribute="top" secondItem="3P7-8g-OVn" secondAttribute="bottom" constant="309" id="lVN-NQ-NfG"/>
+                            <constraint firstAttribute="trailing" secondItem="3P7-8g-OVn" secondAttribute="trailing" constant="66" id="qiN-3x-Me2"/>
                             <constraint firstItem="Sh7-ku-BZb" firstAttribute="bottom" secondItem="MxO-HP-2CK" secondAttribute="top" constant="8" id="tct-K7-Wrc"/>
                             <constraint firstAttribute="trailing" secondItem="MxO-HP-2CK" secondAttribute="trailing" constant="757" id="v2b-Tc-jYn"/>
                         </constraints>
