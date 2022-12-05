@@ -33,6 +33,10 @@ final class LiveGameVC: UIViewController {
     @IBOutlet weak var overlayView: OverlayView!
     @IBOutlet weak var gameEventLabel: UILabel!
     @IBOutlet weak var resumeButton: UIButton!
+    @IBOutlet weak var homeNameLabel: UILabel!
+    @IBOutlet weak var awayNameLabel: UILabel!
+    @IBOutlet weak var homeScoreLabel: UILabel!
+    @IBOutlet weak var awayScoreLabel: UILabel!
 
     var homeColor: UIColor!
     var awayColor: UIColor!
@@ -90,6 +94,18 @@ final class LiveGameVC: UIViewController {
         }
         cameraFeedManager.delegate = self
         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
+        self.homeNameLabel.text = homeName
+        self.homeNameLabel.textColor = homeColor
+        self.awayNameLabel.text = awayName
+        self.awayNameLabel.textColor = awayColor
+        self.homeScoreLabel.text = gameState.teamA?.numMakes != nil ? "\(gameState.teamA?.numMakes)" : "0"
+        self.homeScoreLabel.textColor = homeColor
+        self.awayScoreLabel.text = gameState.teamB?.numMakes != nil ? "\(gameState.teamB?.numMakes)" : "0"
+        self.awayScoreLabel.textColor = awayColor
+        self.homeNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
+        self.awayNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
+        self.homeScoreLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
+        self.awayScoreLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
