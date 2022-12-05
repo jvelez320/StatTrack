@@ -164,13 +164,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Setup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" id="Jbw-cM-gPQ">
-                                <rect key="frame" x="396.5" y="58" width="109" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFC-j5-wz8">
                                 <rect key="frame" x="723" y="320.5" width="102" height="34.5"/>
                                 <state key="normal" title="Button"/>
@@ -180,32 +173,42 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position the camera horizontally. Make sure the ball, rim and players are visible." lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukZ-7z-SgF">
-                                <rect key="frame" x="78" y="298" width="668" height="82"/>
+                                <rect key="frame" x="78" y="298" width="623" height="82"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="668" id="e3J-Nd-9il"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="623" id="e3J-Nd-9il"/>
                                     <constraint firstAttribute="height" constant="82" id="gy2-BT-fyO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" systemColor="systemBackgroundColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Setup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZi-ld-BhY">
+                                <rect key="frame" x="380" y="48" width="136" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="dBL-6l-Gef"/>
+                                    <constraint firstAttribute="width" constant="136" id="nXk-CS-mHe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" systemColor="systemBackgroundColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ukZ-7z-SgF" firstAttribute="leading" secondItem="ste-gy-vb8" secondAttribute="leading" constant="78" id="1LR-51-Ymu"/>
                             <constraint firstItem="rFC-j5-wz8" firstAttribute="leading" secondItem="ste-gy-vb8" secondAttribute="trailing" constant="-173" id="7Ya-mH-BqG"/>
-                            <constraint firstItem="Jbw-cM-gPQ" firstAttribute="top" secondItem="rZq-SJ-1nc" secondAttribute="bottom" constant="10" id="FKG-I5-f0n"/>
-                            <constraint firstItem="rFC-j5-wz8" firstAttribute="leading" secondItem="ukZ-7z-SgF" secondAttribute="trailing" constant="-23" id="UcF-Ko-OmO"/>
+                            <constraint firstItem="aZi-ld-BhY" firstAttribute="top" secondItem="ste-gy-vb8" secondAttribute="topMargin" id="RDH-l4-Y4V"/>
+                            <constraint firstItem="rFC-j5-wz8" firstAttribute="leading" secondItem="ukZ-7z-SgF" secondAttribute="trailing" constant="22" id="UcF-Ko-OmO"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rFC-j5-wz8" secondAttribute="trailing" id="Xxn-LS-JVF"/>
+                            <constraint firstItem="aZi-ld-BhY" firstAttribute="centerX" secondItem="ste-gy-vb8" secondAttribute="centerX" id="YZw-xY-Jij"/>
                             <constraint firstItem="EKO-zz-VGd" firstAttribute="top" secondItem="ukZ-7z-SgF" secondAttribute="bottom" id="fWH-Gp-0hX"/>
-                            <constraint firstAttribute="trailing" secondItem="Jbw-cM-gPQ" secondAttribute="trailing" constant="390.5" id="pcC-Jj-sIb"/>
                             <constraint firstItem="EKO-zz-VGd" firstAttribute="top" secondItem="rFC-j5-wz8" secondAttribute="bottom" constant="25" id="yA4-Df-gel"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="InstrLabel" destination="ukZ-7z-SgF" id="lXG-JA-7LM"/>
                         <outlet property="goButton" destination="rFC-j5-wz8" id="AJE-nE-4w8"/>
-                        <outlet property="setupLabel" destination="Jbw-cM-gPQ" id="kQa-rG-5oy"/>
+                        <outlet property="setupLabel" destination="aZi-ld-BhY" id="w6I-VK-dow"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eie-qG-IV8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -540,7 +543,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8IS-CZ-5cp"/>
+        <segue reference="sGX-kN-LxA"/>
         <segue reference="8Oe-Zb-FIg"/>
     </inferredMetricsTieBreakers>
     <resources>
