@@ -105,13 +105,8 @@
                             <colorWell contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="g1S-J3-ovg">
                                 <rect key="frame" x="707" y="230" width="36" height="36"/>
                             </colorWell>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Setup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" id="ucs-5x-u5h">
-                                <rect key="frame" x="384" y="37" width="95" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="I5u-h8-UvZ"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="95" id="l8c-eP-fQA"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Setup" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" translatesAutoresizingMaskIntoConstraints="NO" id="ucs-5x-u5h">
+                                <rect key="frame" x="400.5" y="27" width="95" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -119,7 +114,6 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ucs-5x-u5h" secondAttribute="trailing" constant="417" id="1MH-XP-4OH"/>
                             <constraint firstItem="g1S-J3-ovg" firstAttribute="leading" secondItem="Vab-HK-t8C" secondAttribute="trailing" constant="509" id="26F-hj-5Eg"/>
                             <constraint firstItem="btM-oU-2ZL" firstAttribute="centerY" secondItem="77H-QR-xHa" secondAttribute="centerY" id="3JR-2N-IK3"/>
                             <constraint firstItem="tbC-tK-rEi" firstAttribute="top" secondItem="btM-oU-2ZL" secondAttribute="bottom" constant="90.5" id="5Jj-7d-KBx"/>
@@ -129,15 +123,15 @@
                             <constraint firstItem="J6W-EX-33R" firstAttribute="centerX" secondItem="g1S-J3-ovg" secondAttribute="centerX" constant="-3.5" id="Anm-0c-DPe"/>
                             <constraint firstItem="tbC-tK-rEi" firstAttribute="top" secondItem="g1S-J3-ovg" secondAttribute="bottom" constant="114" id="CZJ-lj-y5h"/>
                             <constraint firstItem="btM-oU-2ZL" firstAttribute="centerX" secondItem="77H-QR-xHa" secondAttribute="centerX" id="K7C-4K-VWS"/>
-                            <constraint firstItem="ucs-5x-u5h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="77H-QR-xHa" secondAttribute="leading" constant="20" symbolic="YES" id="M4s-2y-FGd"/>
                             <constraint firstItem="J6W-EX-33R" firstAttribute="top" secondItem="5UF-OJ-gok" secondAttribute="bottom" constant="54" id="d8m-N7-EdS"/>
+                            <constraint firstItem="ucs-5x-u5h" firstAttribute="centerX" secondItem="77H-QR-xHa" secondAttribute="centerX" id="ePZ-Y1-X7Y"/>
                             <constraint firstItem="gec-XL-36T" firstAttribute="top" secondItem="5UF-OJ-gok" secondAttribute="bottom" constant="54" id="ghD-35-qJ8"/>
                             <constraint firstItem="Vab-HK-t8C" firstAttribute="leading" secondItem="77H-QR-xHa" secondAttribute="leading" constant="151" id="kxC-Fe-E5V"/>
                             <constraint firstAttribute="trailing" secondItem="J6W-EX-33R" secondAttribute="trailing" constant="63" id="p77-eg-upO"/>
                             <constraint firstItem="g1S-J3-ovg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="btM-oU-2ZL" secondAttribute="trailing" constant="8" symbolic="YES" id="pSV-BG-fa2"/>
                             <constraint firstItem="btM-oU-2ZL" firstAttribute="leading" secondItem="Vab-HK-t8C" secondAttribute="trailing" constant="102" id="rdq-KU-kV9"/>
-                            <constraint firstItem="5UF-OJ-gok" firstAttribute="bottom" secondItem="ucs-5x-u5h" secondAttribute="top" constant="11" id="tXe-1A-MdD"/>
                             <constraint firstItem="gec-XL-36T" firstAttribute="leading" secondItem="77H-QR-xHa" secondAttribute="leading" constant="65" id="tq3-8H-gnh"/>
+                            <constraint firstItem="tbC-tK-rEi" firstAttribute="top" secondItem="ucs-5x-u5h" secondAttribute="bottom" constant="332" id="w9E-S0-Md7"/>
                             <constraint firstItem="tbC-tK-rEi" firstAttribute="top" secondItem="Vab-HK-t8C" secondAttribute="bottom" constant="114" id="zlS-sS-FlG"/>
                         </constraints>
                     </view>
@@ -574,7 +568,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6xO-9l-rn3"/>
+        <segue reference="8IS-CZ-5cp"/>
         <segue reference="8Oe-Zb-FIg"/>
     </inferredMetricsTieBreakers>
     <resources>
