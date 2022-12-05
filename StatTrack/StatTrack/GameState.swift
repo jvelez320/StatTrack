@@ -117,8 +117,8 @@ struct GameState {
     }
     mutating func checkMadeBasket() -> Bool? {
 		// TODO: fine tune these parameters
-		let heightThreshold: CGFloat = 5
-		let distanceThreshold: CGFloat = 25
+		let heightThreshold: CGFloat = 10
+		let distanceThreshold: CGFloat = 30
 		if Date() < recentMadeShot.advanced(by: 3) {
 			return nil
 		}
@@ -167,14 +167,14 @@ struct GameState {
 			
 			if teamAHasCurrentPossession {
 				teamA.perceivedPossession = Date()
-				if Date() > teamB.perceivedPossession.advanced(by: 3) {
+				//if Date() > teamB.perceivedPossession.advanced(by: 3) {
 					teamAHasOfficialPossesion = true
-				}
+				//}
 			} else {
 				teamB.perceivedPossession = Date()
-				if Date() > teamA.perceivedPossession.advanced(by: 3) {
+				//if Date() > teamA.perceivedPossession.advanced(by: 3) {
 					teamAHasOfficialPossesion = false
-				}
+				//}
 			}
 		}
     }

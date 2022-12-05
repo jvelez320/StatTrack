@@ -452,7 +452,7 @@ extension LiveGameVC: CameraFeedManagerDelegate {
       }
 	  
 	  gameState.updateOfficialPossesion(teamACoords: teamACoords, teamBCoords: teamBCoords)
-
+	  //print("Does team A have possession: \(gameState.teamAHasOfficialPossesion)")
     // Hands off drawing to the OverlayView
     self.draw(objectOverlays: objectOverlays)
 
