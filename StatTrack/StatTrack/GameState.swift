@@ -126,13 +126,13 @@ struct GameState {
 
 		print("recentMadeShot: \(recentMadeShot)")
 		if let ballCenterX = ball .centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY, let ballHeight = ball.height, let rimHeight = rim.height {
-			print("ball coords: (\(ballCenterX), \(ballCenterY))")
-			print("rim coords: (\(rimCenterX), \(rimCenterY))")
-			print("recentShotAttempt: \(recentShotAttempt)")
-			print("current time: \(Date())")
+//			print("ball coords: (\(ballCenterX), \(ballCenterY))")
+//			print("rim coords: (\(rimCenterX), \(rimCenterY))")
+//			print("recentShotAttempt: \(recentShotAttempt)")
+//			print("current time: \(Date())")
 			if ballCenterY > rimCenterY && Date() < recentShotAttempt.advanced(by: 3) {
-				print("distance diff: \(abs(ballCenterX - rimCenterX))")
-				print("height diff: \(abs(ballHeight - rimHeight))")
+//				print("distance diff: \(abs(ballCenterX - rimCenterX))")
+//				print("height diff: \(abs(ballHeight - rimHeight))")
 				if abs(ballHeight - rimHeight) < heightThreshold && abs(ballCenterX - rimCenterX) < distanceThreshold {
 					recentMadeShot = Date()
                     if (teamAHasOfficialPossesion == true) {
@@ -182,7 +182,7 @@ struct GameState {
 				teamA.perceivedPossession = Date()
 				//if Date() > teamB.perceivedPossession.advanced(by: 3) {
 					// teamAHasOfficialPossesion = true
-                if (possessionWindow.count >= 150) {
+                if (possessionWindow.count >= 75) {
                     possessionWindow.removeFirst()
                     possessionWindow.append(true)
                 }

@@ -434,9 +434,14 @@ extension LiveGameVC: CameraFeedManagerDelegate {
                   gameEventLabel.text = "Shot Attempted"
               }
 			  
+			  print(gameState.teamAHasOfficialPossesion)
 			  if let shouldDrawShotMadeMissed = gameState.checkMadeBasket() {
 				  if shouldDrawShotMadeMissed {
-					  gameEventLabel.text = "Shot Made"
+					  if gameState.teamAHasOfficialPossesion ?? false {
+						  gameEventLabel.text = gameState.teamA.name + ": " + String(gameState.teamA.numMakes)
+					  } else {
+						  gameEventLabel.text = gameState.teamB.name + ": " + String(gameState.teamB.numMakes)
+					  }
 				  } else {
 					  gameEventLabel.text = "Shot Missed"
 				  }
