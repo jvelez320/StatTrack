@@ -33,6 +33,10 @@ final class LiveGameVC: UIViewController {
     @IBOutlet weak var overlayView: OverlayView!
     @IBOutlet weak var gameEventLabel: UILabel!
     @IBOutlet weak var resumeButton: UIButton!
+    @IBOutlet weak var homeNameLabel: UILabel!
+    @IBOutlet weak var awayNameLabel: UILabel!
+    @IBOutlet weak var homeScoreLabel: UILabel!
+    @IBOutlet weak var awayScoreLabel: UILabel!
 
     var homeColor: UIColor!
     var awayColor: UIColor!
@@ -83,6 +87,22 @@ final class LiveGameVC: UIViewController {
     )
 
     // MARK: View Handling Methods
+    
+    // This function is called before the segue
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+       // Get a reference to the second view controller
+       let finalStatsViewController = segue.destination as! FinalStatsVC
+
+       // Set a variable in the second view controller with the String to pass
+       finalStatsViewController.homeColor = homeColor
+       finalStatsViewController.awayColor = awayColor
+       finalStatsViewController.homeName = homeName
+       finalStatsViewController.awayName = awayName
+       finalStatsViewController.homeScore = gameState.teamA?.numMakes != nil ? "\(String(describing: gameState.teamA?.numMakes))" : "0"
+       finalStatsViewController.awayScore = gameState.teamB?.numMakes != nil ? "\(String(describing: gameState.teamB?.numMakes))" : "0"
+       
+   }
     override func viewDidLoad() {
         super.viewDidLoad()
         guard objectDetectionHelper != nil else {
@@ -90,6 +110,27 @@ final class LiveGameVC: UIViewController {
         }
         cameraFeedManager.delegate = self
         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
+        self.homeNameLabel.text = homeName
+        self.homeNameLabel.textColor = .black
+        self.awayNameLabel.text = awayName
+        self.awayNameLabel.textColor = .black
+        self.homeScoreLabel.text = gameState.teamA?.numMakes != nil ? "\(String(describing: gameState.teamA?.numMakes))" : "0"
+        self.homeScoreLabel.textColor = .black
+        self.awayScoreLabel.text = gameState.teamB?.numMakes != nil ? "\(String(describing: gameState.teamB?.numMakes))" : "0"
+        self.awayScoreLabel.textColor = .black
+
+        self.homeNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
+        self.awayNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
+        self.homeScoreLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
+        self.awayScoreLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
+        self.homeNameLabel.textAlignment = .center
+        self.awayNameLabel.textAlignment = .center
+        self.homeScoreLabel.textAlignment = .center
+        self.awayScoreLabel.textAlignment = .center
+        self.homeNameLabel.backgroundColor = .white
+        self.homeScoreLabel.backgroundColor = .white
+        self.awayNameLabel.backgroundColor = .white
+        self.awayScoreLabel.backgroundColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {
