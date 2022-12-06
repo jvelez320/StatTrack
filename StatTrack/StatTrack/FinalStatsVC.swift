@@ -38,6 +38,10 @@ final class FinalStatsVC: UIViewController {
         self.awayNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 30.0)
         self.homeScoreLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
         self.awayScoreLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 20.0)
+        self.homeNameLabel.textAlignment = .center
+        self.awayNameLabel.textAlignment = .center
+        self.homeScoreLabel.textAlignment = .center
+        self.awayScoreLabel.textAlignment = .center
     }
     
     // This function is called before the segue

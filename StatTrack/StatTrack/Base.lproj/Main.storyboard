@@ -406,7 +406,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8x-vS-nYW">
-                                <rect key="frame" x="395" y="174" width="106" height="26"/>
+                                <rect key="frame" x="395" y="191" width="106" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -428,7 +428,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Tyg-Lf-Gvt" secondAttribute="trailing" constant="223" id="GHn-gc-aEM"/>
                             <constraint firstItem="Tyg-Lf-Gvt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kcf-vl-3YP" secondAttribute="leading" constant="20" symbolic="YES" id="LC7-kn-zoF"/>
-                            <constraint firstItem="F8x-vS-nYW" firstAttribute="top" secondItem="5iO-Mw-LQb" secondAttribute="bottom" constant="113" id="NBi-oV-sDf"/>
+                            <constraint firstItem="F8x-vS-nYW" firstAttribute="top" secondItem="5iO-Mw-LQb" secondAttribute="bottom" constant="130" id="NBi-oV-sDf"/>
                             <constraint firstItem="FOT-rv-4re" firstAttribute="leading" secondItem="Kcf-vl-3YP" secondAttribute="leading" constant="227.5" id="XTu-pm-yNh"/>
                             <constraint firstItem="5iO-Mw-LQb" firstAttribute="top" secondItem="Kcf-vl-3YP" secondAttribute="top" constant="40" id="ZHk-rk-43l"/>
                             <constraint firstItem="hjY-4I-5Md" firstAttribute="top" secondItem="FOT-rv-4re" secondAttribute="bottom" constant="31" id="duF-6I-UdO"/>
@@ -479,7 +479,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6xO-9l-rn3"/>
         <segue reference="tuM-rQ-naH"/>
         <segue reference="8Oe-Zb-FIg"/>
     </inferredMetricsTieBreakers>
