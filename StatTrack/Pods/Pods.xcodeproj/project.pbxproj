@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = TensorFlowLiteTaskVision;
+			productName = TensorFlowLiteTaskVision;
 		};
 /* End PBXAggregateTarget section */
 
@@ -104,7 +105,7 @@
 		5CD983ED1C805FD9235BA662536AB6D3 /* Pods-StatTrack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StatTrack.modulemap"; sourceTree = "<group>"; };
 		62F58F04496318EC3DE71DB29FB26650 /* Query+with.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Query+with.swift"; path = "Sources/SQLite/Typed/Query+with.swift"; sourceTree = "<group>"; };
 		6BDF9D5AD3BA1987D39E221120D6FE4C /* CoreFunctions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreFunctions.swift; path = Sources/SQLite/Typed/CoreFunctions.swift; sourceTree = "<group>"; };
-		6C02075E50C7014BD92C5EA541D68202 /* Pods-StatTrack */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-StatTrack"; path = Pods_StatTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C02075E50C7014BD92C5EA541D68202 /* Pods_StatTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70850D812A7C3DCDF9A2AF75EE1E6498 /* SQLite.swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SQLite.swift-prefix.pch"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		745EE424C83015CBEA14BABAD0577F7D /* TensorFlowLiteTaskVision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TensorFlowLiteTaskVision.framework; path = Frameworks/TensorFlowLiteTaskVision.framework; sourceTree = "<group>"; };
@@ -117,7 +118,7 @@
 		99EC6F161E20DFB55DE2B8D90D2E5A33 /* Query.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Query.swift; path = Sources/SQLite/Typed/Query.swift; sourceTree = "<group>"; };
 		99FBEA9EA05275DEFF85CB3F649B9835 /* Coding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Coding.swift; path = Sources/SQLite/Typed/Coding.swift; sourceTree = "<group>"; };
 		9C60C92D488163E4C4CBB773FF306818 /* SQLite.swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SQLite.swift.release.xcconfig; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A04ABF47795CAFD20F27CBE04C7A0456 /* Blob.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Blob.swift; path = Sources/SQLite/Core/Blob.swift; sourceTree = "<group>"; };
 		A0F77CB468B609D39275B476859E7855 /* Foundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Foundation.swift; path = Sources/SQLite/Foundation.swift; sourceTree = "<group>"; };
 		A6898579A465CB35FE85D450D466CCBC /* Connection+Attach.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Connection+Attach.swift"; path = "Sources/SQLite/Core/Connection+Attach.swift"; sourceTree = "<group>"; };
@@ -183,7 +184,6 @@
 				9DFBF84B085809F6D666AC6DD6F400D7 /* Frameworks */,
 				AE58DC58149A2FC6D2A976B09C25C008 /* Support Files */,
 			);
-			name = TensorFlowLiteTaskVision;
 			path = TensorFlowLiteTaskVision;
 			sourceTree = "<group>";
 		};
@@ -193,7 +193,6 @@
 				56DE9646BA5A3CAF3F523EFA44B4AC1E /* standard */,
 				4FFFC8CE6AC9DBB601F94B3A0E59BC41 /* Support Files */,
 			);
-			name = SQLite.swift;
 			path = SQLite.swift;
 			sourceTree = "<group>";
 		};
@@ -283,7 +282,7 @@
 		CA02503E387C65829AC829153889E647 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C02075E50C7014BD92C5EA541D68202 /* Pods-StatTrack */,
+				6C02075E50C7014BD92C5EA541D68202 /* Pods_StatTrack.framework */,
 				F5FA45A44C42CC2CA3A324A3E914CE19 /* SQLite.swift */,
 			);
 			name = Products;
@@ -383,7 +382,7 @@
 			);
 			name = "Pods-StatTrack";
 			productName = Pods_StatTrack;
-			productReference = 6C02075E50C7014BD92C5EA541D68202 /* Pods-StatTrack */;
+			productReference = 6C02075E50C7014BD92C5EA541D68202 /* Pods_StatTrack.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -678,6 +677,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -781,6 +781,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
