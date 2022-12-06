@@ -126,10 +126,10 @@ final class LiveGameVC: UIViewController {
         self.awayNameLabel.textAlignment = .center
         self.homeScoreLabel.textAlignment = .center
         self.awayScoreLabel.textAlignment = .center
-        self.homeNameLabel.backgroundColor = .gray
-        self.homeScoreLabel.backgroundColor = .gray
-        self.awayNameLabel.backgroundColor = .gray
-        self.awayScoreLabel.backgroundColor = .gray
+        self.homeNameLabel.backgroundColor = .lightGray
+        self.homeScoreLabel.backgroundColor = .lightGray
+        self.awayNameLabel.backgroundColor = .lightGray
+        self.awayScoreLabel.backgroundColor = .lightGray
     }
     
     override func viewDidAppear(_ animated: Bool) {
