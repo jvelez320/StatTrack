@@ -99,8 +99,8 @@ final class LiveGameVC: UIViewController {
        finalStatsViewController.awayColor = awayColor
        finalStatsViewController.homeName = homeName
        finalStatsViewController.awayName = awayName
-       finalStatsViewController.homeScore = gameState.teamA?.numMakes != nil ? "\(gameState.teamA?.numMakes)" : "0"
-       finalStatsViewController.awayScore = gameState.teamB?.numMakes != nil ? "\(gameState.teamB?.numMakes)" : "0"
+       finalStatsViewController.homeScore = gameState.teamA?.numMakes != nil ? "\(String(describing: gameState.teamA?.numMakes))" : "0"
+       finalStatsViewController.awayScore = gameState.teamB?.numMakes != nil ? "\(String(describing: gameState.teamB?.numMakes))" : "0"
        
    }
     override func viewDidLoad() {
@@ -114,9 +114,9 @@ final class LiveGameVC: UIViewController {
         self.homeNameLabel.textColor = homeColor
         self.awayNameLabel.text = awayName
         self.awayNameLabel.textColor = awayColor
-        self.homeScoreLabel.text = gameState.teamA?.numMakes != nil ? "\(gameState.teamA?.numMakes)" : "0"
+        self.homeScoreLabel.text = gameState.teamA?.numMakes != nil ? "\(String(describing: gameState.teamA?.numMakes))" : "0"
         self.homeScoreLabel.textColor = homeColor
-        self.awayScoreLabel.text = gameState.teamB?.numMakes != nil ? "\(gameState.teamB?.numMakes)" : "0"
+        self.awayScoreLabel.text = gameState.teamB?.numMakes != nil ? "\(String(describing: gameState.teamB?.numMakes))" : "0"
         self.awayScoreLabel.textColor = awayColor
         self.homeNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
         self.awayNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
@@ -126,10 +126,10 @@ final class LiveGameVC: UIViewController {
         self.awayNameLabel.textAlignment = .center
         self.homeScoreLabel.textAlignment = .center
         self.awayScoreLabel.textAlignment = .center
-        self.homeNameLabel.backgroundColor = .lightGray
-        self.homeScoreLabel.backgroundColor = .lightGray
-        self.awayNameLabel.backgroundColor = .lightGray
-        self.awayScoreLabel.backgroundColor = .lightGray
+        self.homeNameLabel.backgroundColor = .white
+        self.homeScoreLabel.backgroundColor = .white
+        self.awayNameLabel.backgroundColor = .white
+        self.awayScoreLabel.backgroundColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {
