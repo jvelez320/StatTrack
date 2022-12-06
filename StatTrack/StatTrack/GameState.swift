@@ -92,6 +92,7 @@ struct GameState {
     var teamAHasOfficialPossesion: Bool? = nil
     var recentShotAttempt: Date = Date().advanced(by: -4) // 3 second buffer if becomes true
 	var recentMadeShot: Date = Date().advanced(by: -4) // 3 second buffer if becomes true
+    var possessionWindow = [Bool]()
     
     var teamA: Team
     var teamB: Team
@@ -134,10 +135,22 @@ struct GameState {
 				print("height diff: \(abs(ballHeight - rimHeight))")
 				if abs(ballHeight - rimHeight) < heightThreshold && abs(ballCenterX - rimCenterX) < distanceThreshold {
 					recentMadeShot = Date()
+                    if (teamAHasOfficialPossesion == true) {
+                        teamA.numMakes += 1
+                    }
+                    else{
+                        teamB.numMakes += 1
+                    }
 					// Checking for new shot attempts only: old code returned true no matter the time difference
 					return true
 				} else {
 					recentMadeShot = Date()
+                    if (teamAHasOfficialPossesion == true) {
+                        teamA.numMisses += 1
+                    }
+                    else{
+                        teamB.numMisses += 1
+                    }
 					return false // miss
 				}
 			}
@@ -168,12 +181,50 @@ struct GameState {
 			if teamAHasCurrentPossession {
 				teamA.perceivedPossession = Date()
 				//if Date() > teamB.perceivedPossession.advanced(by: 3) {
-					teamAHasOfficialPossesion = true
+					// teamAHasOfficialPossesion = true
+                if (possessionWindow.count >= 150) {
+                    possessionWindow.removeFirst()
+                    possessionWindow.append(true)
+                }
+                else{
+                    possessionWindow.append(true)
+                }
+                var teamACount = 0
+                for value in possessionWindow {
+                    if value == true {
+                        teamACount += 1
+                    }
+                }
+                if teamACount > (possessionWindow.count / 2) {
+                    teamAHasOfficialPossesion = true
+                }
+                else{
+                    teamAHasOfficialPossesion = false
+                }
 				//}
 			} else {
 				teamB.perceivedPossession = Date()
 				//if Date() > teamA.perceivedPossession.advanced(by: 3) {
-					teamAHasOfficialPossesion = false
+					// teamAHasOfficialPossesion = false
+                if (possessionWindow.count >= 150) {
+                    possessionWindow.removeFirst()
+                    possessionWindow.append(false)
+                }
+                else{
+                    possessionWindow.append(false)
+                }
+                var teamACount = 0
+                for value in possessionWindow {
+                    if value == true {
+                        teamACount += 1
+                    }
+                }
+                if teamACount > (possessionWindow.count / 2) {
+                    teamAHasOfficialPossesion = true
+                }
+                else{
+                    teamAHasOfficialPossesion = false
+                }
 				//}
 			}
 		}
