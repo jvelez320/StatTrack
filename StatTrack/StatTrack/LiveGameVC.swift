@@ -99,8 +99,8 @@ final class LiveGameVC: UIViewController {
        finalStatsViewController.awayColor = awayColor
        finalStatsViewController.homeName = homeName
        finalStatsViewController.awayName = awayName
-       finalStatsViewController.homeScore = gameState.teamA?.numMakes != nil ? "\(String(describing: gameState.teamA?.numMakes))" : "0"
-       finalStatsViewController.awayScore = gameState.teamB?.numMakes != nil ? "\(String(describing: gameState.teamB?.numMakes))" : "0"
+	   finalStatsViewController.homeScore = "\(gameState.teamA.numMakes)"
+	   finalStatsViewController.awayScore = "\(gameState.teamB.numMakes)"
        
    }
     override func viewDidLoad() {
@@ -114,9 +114,9 @@ final class LiveGameVC: UIViewController {
         self.homeNameLabel.textColor = .black
         self.awayNameLabel.text = awayName
         self.awayNameLabel.textColor = .black
-        self.homeScoreLabel.text = gameState.teamA?.numMakes != nil ? "\(String(describing: gameState.teamA?.numMakes))" : "0"
+		self.homeScoreLabel.text = "\(gameState.teamA.numMakes)"
         self.homeScoreLabel.textColor = .black
-        self.awayScoreLabel.text = gameState.teamB?.numMakes != nil ? "\(String(describing: gameState.teamB?.numMakes))" : "0"
+		self.awayScoreLabel.text = "\(gameState.teamB.numMakes)"
         self.awayScoreLabel.textColor = .black
 
         self.homeNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 25.0)
@@ -131,6 +131,8 @@ final class LiveGameVC: UIViewController {
         self.homeScoreLabel.backgroundColor = .white
         self.awayNameLabel.backgroundColor = .white
         self.awayScoreLabel.backgroundColor = .white
+		
+		gameState.liveGameView = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -477,10 +479,15 @@ extension LiveGameVC: CameraFeedManagerDelegate {
 			  
 			  print(gameState.teamAHasOfficialPossesion)
 			  if let shouldDrawShotMadeMissed = gameState.checkMadeBasket() {
+				  var teamName = gameState.teamB.name
+				  if gameState.teamAHasOfficialPossesion ?? false {
+					  teamName = gameState.teamA.name
+				  }
+
 				  if shouldDrawShotMadeMissed {
-					  gameEventLabel.text = "Shot Made"
+					  gameEventLabel.text = "Shot Made by \(teamName)"
 				  } else {
-					  gameEventLabel.text = "Shot Missed"
+					  gameEventLabel.text = "Shot Missed by \(teamName)"
 				  }
 			  }
 

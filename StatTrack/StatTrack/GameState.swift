@@ -99,6 +99,7 @@ struct GameState {
     var ball: Ball
     var rim: Rim
     var net: Net
+	var liveGameView: LiveGameVC? = nil
     
 //    let db = try Connection(fileURL.path)
     
@@ -142,6 +143,8 @@ struct GameState {
                         teamB.numMakes += 1
                     }
 					// Checking for new shot attempts only: old code returned true no matter the time difference
+					liveGameView?.homeScoreLabel.text = "\(teamA.numMakes)"
+					liveGameView?.awayScoreLabel.text = "\(teamB.numMakes)"
 					return true
 				} else {
 					recentMadeShot = Date()
