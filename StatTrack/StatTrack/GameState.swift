@@ -90,7 +90,7 @@ func initiailizeDB() -> () {
 struct GameState {
     var currentTime: Double? = nil
     var teamAHasOfficialPossesion: Bool = false
-    var recentShotAttempt: Date? = nil // 3 second buffer if becomes true
+    var recentShotAttempt: Date = Date().advanced(by: -4) // 3 second buffer if becomes true
     var recentMadeShot: Bool = false // 3 second buffer if becomes true
     
     var teamA: Team? = nil
@@ -103,8 +103,12 @@ struct GameState {
     
     mutating func checkShotAttempt() -> Bool {
         if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY {
-            recentShotAttempt = Date()
-            return ballCenterY > rimCenterY && abs(ballCenterX - rimCenterX) < 100
+            if (ballCenterY > rimCenterY && abs(ballCenterX - rimCenterX) < 100) {
+                if (Date() > recentShotAttempt.advanced(by: 3)) {
+                    recentShotAttempt = Date()
+                }
+                return true
+            }
         }
         return false
     }
@@ -125,10 +129,8 @@ struct GameState {
     
     }
     mutating func updateRimCoordinates(xCoord: Double, yCoord: Double) {
-        print(rim.centerX ?? -1)
         rim.centerX = xCoord
         rim.centerY = yCoord
-        print(rim.centerX ?? -1)
     }
     mutating func updateNetCoordinates(xCoord: Double, yCoord: Double) {
         net.centerX = xCoord
