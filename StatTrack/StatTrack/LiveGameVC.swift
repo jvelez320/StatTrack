@@ -87,6 +87,22 @@ final class LiveGameVC: UIViewController {
     )
 
     // MARK: View Handling Methods
+    
+    // This function is called before the segue
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+       // Get a reference to the second view controller
+       let finalStatsViewController = segue.destination as! FinalStatsVC
+
+       // Set a variable in the second view controller with the String to pass
+       finalStatsViewController.homeColor = homeColor
+       finalStatsViewController.awayColor = awayColor
+       finalStatsViewController.homeName = homeName
+       finalStatsViewController.awayName = awayName
+       finalStatsViewController.homeScore = gameState.teamA?.numMakes != nil ? "\(gameState.teamA?.numMakes)" : "0"
+       finalStatsViewController.awayScore = gameState.teamB?.numMakes != nil ? "\(gameState.teamB?.numMakes)" : "0"
+       
+   }
     override func viewDidLoad() {
         super.viewDidLoad()
         guard objectDetectionHelper != nil else {
