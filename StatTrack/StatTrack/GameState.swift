@@ -89,12 +89,13 @@ func initiailizeDB() -> () {
 
 struct GameState {
     var currentTime: Double? = nil
-    var teamAHasOfficialPossesion: Bool = false
+    var teamAHasOfficialPossesion: Bool? = nil
     var recentShotAttempt: Date = Date().advanced(by: -4) // 3 second buffer if becomes true
 	var recentMadeShot: Date = Date().advanced(by: -4) // 3 second buffer if becomes true
+    var possessionWindow = [Bool]()
     
-    var teamA: Team? = nil
-    var teamB: Team? = nil
+    var teamA: Team
+    var teamB: Team
     var ball: Ball
     var rim: Rim
     var net: Net
@@ -105,7 +106,7 @@ struct GameState {
 		// TODO: fine tune this parameter
 		let threshold: CGFloat = 70
         if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY {
-            if (ballCenterY > rimCenterY && abs(ballCenterX - rimCenterX) < threshold) {
+            if (ballCenterY < rimCenterY && abs(ballCenterX - rimCenterX) < threshold) {
                 if (Date() > recentShotAttempt.advanced(by: 3)) {
                     recentShotAttempt = Date()
 					// Checking for new shot attempts only: old code returned true no matter the time difference
@@ -117,20 +118,39 @@ struct GameState {
     }
     mutating func checkMadeBasket() -> Bool? {
 		// TODO: fine tune these parameters
-		let heightThreshold: CGFloat = 5
-		let distanceThreshold: CGFloat = 20
+		let heightThreshold: CGFloat = 10
+		let distanceThreshold: CGFloat = 30
 		if Date() < recentMadeShot.advanced(by: 3) {
 			return nil
 		}
 
-		if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY, let ballHeight = ball.height, let rimHeight = rim.height {
-			if ballCenterY < rimCenterY && Date() < recentShotAttempt.advanced(by: 3) {
+		print("recentMadeShot: \(recentMadeShot)")
+		if let ballCenterX = ball .centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY, let ballHeight = ball.height, let rimHeight = rim.height {
+//			print("ball coords: (\(ballCenterX), \(ballCenterY))")
+//			print("rim coords: (\(rimCenterX), \(rimCenterY))")
+//			print("recentShotAttempt: \(recentShotAttempt)")
+//			print("current time: \(Date())")
+			if ballCenterY > rimCenterY && Date() < recentShotAttempt.advanced(by: 3) {
+//				print("distance diff: \(abs(ballCenterX - rimCenterX))")
+//				print("height diff: \(abs(ballHeight - rimHeight))")
 				if abs(ballHeight - rimHeight) < heightThreshold && abs(ballCenterX - rimCenterX) < distanceThreshold {
 					recentMadeShot = Date()
+                    if (teamAHasOfficialPossesion == true) {
+                        teamA.numMakes += 1
+                    }
+                    else{
+                        teamB.numMakes += 1
+                    }
 					// Checking for new shot attempts only: old code returned true no matter the time difference
 					return true
 				} else {
 					recentMadeShot = Date()
+                    if (teamAHasOfficialPossesion == true) {
+                        teamA.numMisses += 1
+                    }
+                    else{
+                        teamB.numMisses += 1
+                    }
 					return false // miss
 				}
 			}
@@ -138,8 +158,76 @@ struct GameState {
 		
 		return nil
     }
-    mutating func checkPossesionChange() -> Bool {
-        return false
+	mutating func updateOfficialPossesion(teamACoords: [(Double, Double)], teamBCoords: [(Double, Double)]) -> Void {
+		if let ballCenterX = ball.centerX, let ballCenterY = ball.centerY {
+			var teamAHasCurrentPossession = false
+			var minDistance = Double.greatestFiniteMagnitude
+			for coordPair in teamACoords {
+				let currDistance = sqrt(pow(coordPair.0 - ballCenterX, 2) + pow(coordPair.1 - ballCenterY, 2))
+				if currDistance < minDistance {
+					teamAHasCurrentPossession = true
+					minDistance = currDistance
+				}
+			}
+			
+			for coordPair in teamBCoords {
+				let currDistance = sqrt(pow(coordPair.0 - ballCenterX, 2) + pow(coordPair.1 - ballCenterY, 2))
+				if currDistance < minDistance {
+					teamAHasCurrentPossession = false
+					break
+				}
+			}
+			
+			if teamAHasCurrentPossession {
+				teamA.perceivedPossession = Date()
+				//if Date() > teamB.perceivedPossession.advanced(by: 3) {
+					// teamAHasOfficialPossesion = true
+                if (possessionWindow.count >= 75) {
+                    possessionWindow.removeFirst()
+                    possessionWindow.append(true)
+                }
+                else{
+                    possessionWindow.append(true)
+                }
+                var teamACount = 0
+                for value in possessionWindow {
+                    if value == true {
+                        teamACount += 1
+                    }
+                }
+                if teamACount > (possessionWindow.count / 2) {
+                    teamAHasOfficialPossesion = true
+                }
+                else{
+                    teamAHasOfficialPossesion = false
+                }
+				//}
+			} else {
+				teamB.perceivedPossession = Date()
+				//if Date() > teamA.perceivedPossession.advanced(by: 3) {
+					// teamAHasOfficialPossesion = false
+                if (possessionWindow.count >= 150) {
+                    possessionWindow.removeFirst()
+                    possessionWindow.append(false)
+                }
+                else{
+                    possessionWindow.append(false)
+                }
+                var teamACount = 0
+                for value in possessionWindow {
+                    if value == true {
+                        teamACount += 1
+                    }
+                }
+                if teamACount > (possessionWindow.count / 2) {
+                    teamAHasOfficialPossesion = true
+                }
+                else{
+                    teamAHasOfficialPossesion = false
+                }
+				//}
+			}
+		}
     }
     func determineWhichTeamShot() -> String {
         return "none"
@@ -178,16 +266,18 @@ extension GameState {
         ball = Ball()
         rim = Rim()
         net = Net()
+		teamA = Team()
+		teamB = Team()
         initiailizeDB()
     }
 }
 
 struct Team {
-    var name: String
-    var shirtColor: UIColor
-    var perceivedPossession: Double
-    var numMakes: Int
-    var numMisses: Int
+    var name: String = ""
+    var shirtColor: UIColor = UIColor()
+    var perceivedPossession: Date = Date()
+    var numMakes: Int = 0
+    var numMisses: Int = 0
 }
 
 struct Ball {

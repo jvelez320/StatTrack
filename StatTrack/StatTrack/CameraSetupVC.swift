@@ -33,6 +33,10 @@ final class CameraSetupVC: UIViewController {
        liveGameViewController.awayColor = awayColor
        liveGameViewController.homeName = homeName
        liveGameViewController.awayName = awayName
+	   liveGameViewController.gameState.teamA.name = homeName
+	   liveGameViewController.gameState.teamB.name = awayName
+	   liveGameViewController.gameState.teamA.shirtColor = homeColor
+	   liveGameViewController.gameState.teamB.shirtColor = awayColor
    }
     
     
