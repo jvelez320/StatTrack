@@ -209,7 +209,7 @@ struct GameState {
 				teamB.perceivedPossession = Date()
 				//if Date() > teamA.perceivedPossession.advanced(by: 3) {
 					// teamAHasOfficialPossesion = false
-                if (possessionWindow.count >= 150) {
+                if (possessionWindow.count >= 75) {
                     possessionWindow.removeFirst()
                     possessionWindow.append(false)
                 }
