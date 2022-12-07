@@ -20,7 +20,7 @@ let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDom
 
 func initiailizeDB() -> () {
     do {
-        print(fileURL.path)
+        // print(fileURL.path)
         
         let db = try Connection(fileURL.path)
 
@@ -51,7 +51,7 @@ func initiailizeDB() -> () {
             t.column(time)
         })
         
-        try print(db.schema.columnDefinitions(table: "frames"))
+        // try print(db.schema.columnDefinitions(table: "frames"))
         
         // CREATE TABLE "users" (
         //     "id" INTEGER PRIMARY KEY NOT NULL,
@@ -125,7 +125,7 @@ struct GameState {
 			return nil
 		}
 
-		print("recentMadeShot: \(recentMadeShot)")
+		// print("recentMadeShot: \(recentMadeShot)")
 		if let ballCenterX = ball .centerX, let ballCenterY = ball.centerY, let rimCenterX = rim.centerX, let rimCenterY = rim.centerY, let ballHeight = ball.height, let rimHeight = rim.height {
 //			print("ball coords: (\(ballCenterX), \(ballCenterY))")
 //			print("rim coords: (\(rimCenterX), \(rimCenterY))")
