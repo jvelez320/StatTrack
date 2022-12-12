@@ -1,4 +1,4 @@
-# UM EECS441§3&4 F22 StatTrack
+# UM EECS441 F22 StatTrack
 
 | Video  |  Wiki |  Trello  |
 |:-----:|:-----:|:--------:|
